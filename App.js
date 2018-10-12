@@ -2,10 +2,15 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-import RegForm from "./app/components/RegForm.js";
+import RegForm from "./app/scenes/RegForm.js";
+import firebase from "./services/firebase.js";
 
 type Props = {};
 export default class App extends Component<Props> {
+  // componentWillMount() {
+  //     const firebaseApp = firebase.initializeApp(firebase.firebaseConfig);
+  // }
+
   render() {
     return (
         <View style = {styles.container}>
@@ -20,11 +25,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2E86C1',
+    backgroundColor: '#12c2e9',
     paddingLeft: 60,
     paddingRight: 60,
   },
-
-
-
 });
