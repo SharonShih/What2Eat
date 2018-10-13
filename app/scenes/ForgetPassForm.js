@@ -4,16 +4,9 @@ import { StyleSheet, Text, View, ActivityIndicator, } from "react-native";
 import { Input } from "../../app/components/Input.js";
 import { Button } from "../../app/components/Button.js";
 
+
 type Props = {};
 export default class RegForm extends Component<Props> {
-
-    constructor(Props) {
-        super(Props);
-        this.state = {
-
-        };
-    }
-
     state = {
         firstname:'',
         lastname: '',
@@ -63,6 +56,7 @@ export default class RegForm extends Component<Props> {
 const styles = StyleSheet.create({
     RegForm: {
         alignSelf: 'stretch',
+
     },
     header: {
         fontSize: 24,

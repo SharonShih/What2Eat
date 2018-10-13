@@ -2,17 +2,21 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ActivityIndicator,} from 'react-native';
 
+import  Firebase from "./services/Firebase.js";
+import * as firebase from 'firebase';
+
 import RegForm from "./app/scenes/RegForm.js";
-import Firebase from "./services/Firebase.js";
 
 type Props = {};
 export default class App extends Component<Props> {
-  // componentWillMount() {
-  //     const firebaseApp = firebase.initializeApp(firebase.firebaseConfig);
-  // }
 
-    state = {
-        authenticating: false,
+    constructor(Props) {
+        super(Props);
+        this.state = {
+            isLoadingComplete: false,
+        };
+
+        if (!firebase.app.length) { firebase.initializeApp(Firebase.config); }
     }
 
     renderCurrentState() {
