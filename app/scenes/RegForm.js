@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import { Input } from "../components/Input.js";
+import { Button } from "../components/Button.js";
 
 type Props = {};
 export default class RegForm extends Component<Props> {
@@ -44,9 +45,7 @@ export default class RegForm extends Component<Props> {
                     onChangeText={password  => this.setState({ password })}
                     value = {this.state.password}
                 />
-                {/*<TouchableOpacity style={styles.button}>*/}
-                    {/*<Text style={styles.buttonText}>Sign Up!</Text>*/}
-                {/*</TouchableOpacity>*/}
+                <Button onPress={() => console.log("pressed")}>Log In</Button>
             </View>
         );
     }
