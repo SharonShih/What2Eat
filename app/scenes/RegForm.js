@@ -5,6 +5,7 @@ import {
     View,
     TextInput,
     TouchableOpacity,
+    ActivityIndicator,
 } from "react-native";
 
 import { Input } from "../components/Input.js";
@@ -17,6 +18,13 @@ export default class RegForm extends Component<Props> {
         lastname: '',
         email: '',
         password: '',
+        authenticating: false,
+    }
+
+    onPressSignIn() {
+        this.setState ({
+            authenticating: true,
+        })
     }
 
     render() {
@@ -45,7 +53,7 @@ export default class RegForm extends Component<Props> {
                     onChangeText={password  => this.setState({ password })}
                     value = {this.state.password}
                 />
-                <Button onPress={() => console.log("pressed")}>Log In</Button>
+                <Button onPress={() => this.onPressSignIn()}>Log In</Button>
             </View>
         );
     }
