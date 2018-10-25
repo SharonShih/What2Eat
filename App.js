@@ -1,56 +1,30 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, ActivityIndicator,} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image} from 'react-native';
 
-import  Firebase from "./services/Firebase.js";
-import * as firebase from 'firebase';
-
-import RegForm from "./app/scenes/RegForm.js";
-
+//import RegForm from "./app/components/RegForm.js";
+//import Profile from "./app/components/Profile.js";
+import MainPage from "./app/components/MainPage.js";
 type Props = {};
 export default class App extends Component<Props> {
-
-    constructor(Props) {
-        super(Props);
-        this.state = {
-            isLoadingComplete: false,
-        };
-
-        if (!firebase.app.length) { firebase.initializeApp(Firebase.config); }
-    }
-
-    renderCurrentState() {
-	  if (this.state.authenticating) {
-	      return (
-	          <View>
-                  <ActivityIndicator size='large'/>
-              </View>
-          );
-      }
-
-      return (
-          <View>
-              <RegForm />
-          </View>
-      );
-    }
-
-    render() {
-      return (
-          <View style = {styles.container}>
-              {this.renderCurrentState()}
-          </View>
-      );
-    }
+  render() {
+    return (
+        <View style = {styles.container}>
+            <MainPage />
+        </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+    container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#12c2e9',
-    paddingLeft: 60,
-    paddingRight: 60,
+    backgroundColor: '#336699',
   },
+
+
+
+
 });
