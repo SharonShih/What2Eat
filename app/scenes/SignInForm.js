@@ -1,62 +1,65 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, } from "react-native";
+import { StyleSheet, Text, TextInput, View, Button, Alert} from 'react-native';
 
-import { Input } from "../../app/components/Input.js";
-import { Button } from "../../app/components/Button.js";
+import Firebase from '../../services/Firebase';
 
+export default class SignInForm extends Component<Props> {
 
-type Props = {};
-export default class RegForm extends Component<Props> {
-    state = {
-        firstname:'',
-        lastname: '',
-        email: '',
-        password: '',
-        authenticating: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+        }
     }
 
-    onPressSignIn() {
-        this.setState ({
-            authenticating: true,
-        })
+    onPressSignIn(e) {
+        //e.preventDefault();
+        Firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+            this.props.navigation.navigate('Home');
+        }, (error) => {
+            Alert.alert(error.message);
+        });
     }
+
+    // handleChange(e) {
+    //     this.setState({ [e.target.name]: e.target.value });
+    // }
 
     render() {
         return (
-            <View style = {styles.RegForm}>
-                <Text style={styles.header}> Registration </Text>
-                <Input
-                    label = 'First Name'
-                    placeholder = "Please enter your first name..."
-                    onChangeText={firstname => this.setState({ firstname })}
-                    value = {this.state.firstname}
-                />
-                <Input
-                    placeholder = "Please enter your last name..."
-                    onChangeText={lastname => this.setState({ lastname })}
-                    value = {this.state.lastname}
-                />
-                <Input
+            <View>
+                <Text style={styles.header}> Sign In </Text>
+                <TextInput
+                    style={styles.textInput}
                     placeholder = "Please enter your email..."
-                    onChangeText={email => this.setState({ email })}
+                    onChangeText={(text) => this.setState({ email: text })}
                     value = {this.state.email}
                 />
-                <Input
+                <TextInput
+                    style={styles.textInput}
                     placeholder = "Please set up your password.."
                     secureTextEntry
-                    onChangeText={password  => this.setState({ password })}
+                    onChangeText={(text)  => this.setState({ password: text })}
                     value = {this.state.password}
                 />
-                <Button onPress={() => this.onPressSignIn()}>Log In</Button>
+                <Button
+                    title="Log In"
+                    onPress={() => this.onPressSignIn()} />
+                <Button title="Forget Password?"
+                    onPress= {() => this.props.navigation.navigate('ForgetPassForm')} />
+                <Button title="Create Account"
+                    onPress= {() => this.props.navigation.navigate('RegForm')} />
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    RegForm: {
-        alignSelf: 'stretch',
 
+const styles = StyleSheet.create({
+    container: {
+        alignSelf: 'stretch',
+        justifyContent: 'center',
     },
     header: {
         fontSize: 24,
@@ -66,6 +69,14 @@ const styles = StyleSheet.create({
         borderBottomColor: "#000000",
         borderBottomWidth: 1,
         fontWeight: 'bold',
-
+    },
+    textInput: {
+        alignSelf: 'stretch',
+        fontSize: 18,
+        color: "#FFF",
+        marginBottom: 30,
+        height: 40,
+        borderBottomColor: "#FFF",
+        borderBottomWidth: 1,
     }
 });
