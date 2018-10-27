@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, ActivityIndicator, Button} from "react-native";
+import {StyleSheet, Text, TextInput, View, Button, Alert} from "react-native";
+import Firebase from '../../../services/Firebase';
 
 type Props = {};
 export default class ForgetPassForm extends Component<Props> {
-    state = {
-        email: '',
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+        }
     }
 
     onPressReset() {
-        //TODO: reset password method
+        Firebase.auth().sendPasswordResetEmail(this.state.email)
+            .then(()=>{
+                Alert.alert("Reset password email sent");
+                this.props.navigation.navigate('SignInForm')
+            }, (error) => {
+                Alert.alert(error.message);
+            });
     }
 
     render() {
@@ -22,7 +33,8 @@ export default class ForgetPassForm extends Component<Props> {
                 />
                 <Button
                     title= "Reset"
-                    onPress={() => this.onPressReset()} />
+                    onPress={() => this.onPressReset()}
+                />
             </View>
         );
     }

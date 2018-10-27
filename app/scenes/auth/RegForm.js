@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, ActivityIndicator, Button, Alert} from "react-native";
-import Firebase from '../../services/Firebase';
+import { StyleSheet, Text, TextInput, View, Button, Alert} from "react-native";
+import Firebase from '../../../services/Firebase';
 
 export default class RegForm extends Component<Props> {
 
     constructor(Props) {
         super(Props);
         this.state = {
-
+            email: '',
+            password: '',
+            passwordConfirm: '',
         };
-    }
-
-    state = {
-        //firstName:'',
-        //lastName: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
     }
 
     onPressSignUp() {
@@ -35,19 +29,6 @@ export default class RegForm extends Component<Props> {
         return (
             <View style = {styles.RegForm}>
                 <Text style={styles.header}> Registration </Text>
-                {/*<TextInput*/}
-                    {/*style={styles.textInput}*/}
-                    {/*label = 'First Name'*/}
-                    {/*placeholder = "Please enter your first name..."*/}
-                    {/*onChangeText={firstName => this.setState({ firstName })}*/}
-                    {/*value = {this.state.firstName}*/}
-                {/*/>*/}
-                {/*<TextInput*/}
-                    {/*style={styles.textInput}*/}
-                    {/*placeholder = "Please enter your last name..."*/}
-                    {/*onChangeText={lastName => this.setState({ lastName })}*/}
-                    {/*value = {this.state.lastName}*/}
-                {/*/>*/}
                 <TextInput
                     style={styles.textInput}
                     placeholder = "Please enter your email..."

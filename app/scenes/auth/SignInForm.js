@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, Alert} from 'react-native';
 
-import Firebase from '../../services/Firebase';
+import Firebase from '../../../services/Firebase';
 
 export default class SignInForm extends Component<Props> {
 
@@ -13,18 +13,15 @@ export default class SignInForm extends Component<Props> {
         }
     }
 
-    onPressSignIn(e) {
-        //e.preventDefault();
-        Firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-            this.props.navigation.navigate('Home');
+    onPressSignIn() {
+        Firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(()=>{
+                this.props.navigation.navigate('Home');
         }, (error) => {
             Alert.alert(error.message);
         });
     }
 
-    // handleChange(e) {
-    //     this.setState({ [e.target.name]: e.target.value });
-    // }
 
     render() {
         return (

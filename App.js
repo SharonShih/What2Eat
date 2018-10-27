@@ -5,10 +5,11 @@ import { createStackNavigator } from 'react-navigation';
 
 import Firebase from "./services/Firebase.js";
 
-import SignInForm from "./app/scenes/SignInForm";
+import SignInForm from "./app/scenes/auth/SignInForm";
 import Home from "./app/scenes/Home";
-import RegForm from "./app/scenes/RegForm";
-import ForgetPassForm from "./app/scenes/ForgetPassForm";
+import RegForm from "./app/scenes/auth/RegForm";
+import ForgetPassForm from "./app/scenes/auth/ForgetPassForm";
+
 import Profile from "./app/components/Profile";
 
 export default class App extends Component<Props> {
@@ -16,15 +17,12 @@ export default class App extends Component<Props> {
     constructor(props) {
         super(props);
         this.state = ({
-            isAuthenticationReady: false,
             isAuthenticated: false,
         });
-        //Firebase;
         Firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
     }
 
     onAuthStateChanged = (user) => {
-        this.setState({isAuthenticationReady: true});
         this.setState({isAuthenticated: !!user});
     }
 
