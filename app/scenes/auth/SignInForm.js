@@ -30,6 +30,9 @@ export default class SignInForm extends Component<Props> {
                 <TextInput
                     style={styles.textInput}
                     placeholder = "Please enter your email..."
+                    keyboardType = "email-address"
+                    autoCapitalize = "none"
+                    autoCorrect = { false }
                     onChangeText={(text) => this.setState({ email: text })}
                     value = {this.state.email}
                 />
@@ -37,6 +40,8 @@ export default class SignInForm extends Component<Props> {
                     style={styles.textInput}
                     placeholder = "Please set up your password.."
                     secureTextEntry
+                    autoCapitalize = "none"
+                    autoCorrect = { false }
                     onChangeText={(text)  => this.setState({ password: text })}
                     value = {this.state.password}
                 />

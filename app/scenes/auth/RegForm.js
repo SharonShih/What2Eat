@@ -32,6 +32,9 @@ export default class RegForm extends Component<Props> {
                 <TextInput
                     style={styles.textInput}
                     placeholder = "Please enter your email..."
+                    keyboardType = "email-address"
+                    autoCapitalize = "none"
+                    autoCorrect = { false }
                     onChangeText={email => this.setState({ email })}
                     value = {this.state.email}
                 />
@@ -39,6 +42,8 @@ export default class RegForm extends Component<Props> {
                     style={styles.textInput}
                     placeholder = "Please set up your password.."
                     secureTextEntry
+                    autoCapitalize = "none"
+                    autoCorrect = { false }
                     onChangeText={password  => this.setState({ password })}
                     value = {this.state.password}
                 />
@@ -46,6 +51,8 @@ export default class RegForm extends Component<Props> {
                     style={styles.textInput}
                     placeholder = "Please confirm your password.."
                     secureTextEntry
+                    autoCapitalize = "none"
+                    autoCorrect = { false }
                     onChangeText={passwordConfirm  => this.setState({ passwordConfirm })}
                     value = {this.state.passwordConfirm}
                 />

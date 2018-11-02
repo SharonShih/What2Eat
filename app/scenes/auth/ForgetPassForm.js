@@ -28,6 +28,9 @@ export default class ForgetPassForm extends Component<Props> {
                 <Text style={styles.header}> Forget Passoword </Text>
                 <TextInput style={styles.textInput}
                     placeholder = "Please enter your email..."
+                    keyboardType = "email-address"
+                    autoCapitalize = "none"
+                    autoCorrect = { false }
                     onChangeText={email => this.setState({ email })}
                     value = {this.state.email}
                 />
