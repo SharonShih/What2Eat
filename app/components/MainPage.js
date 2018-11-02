@@ -14,7 +14,7 @@ type Props = {};
 export default class MainPage extends Component<Props> {
     render() {
         return (
-            <ImageBackgroun  source={ require ('./app/components/Stellar.png')}
+            <ImageBackground  source={ require ('../components/Stellar.png')}
                 style={styles.Background}>
                 <Text style = {styles.circleText}>What to{"\n"}Eat Today?</Text>
 
@@ -26,7 +26,7 @@ export default class MainPage extends Component<Props> {
 
             </View>
 
-            </ImageBackgroun>
+            </ImageBackground>
 
         );
     }

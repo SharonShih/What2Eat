@@ -9,7 +9,7 @@ import SignInForm from "./app/scenes/auth/SignInForm";
 import Home from "./app/scenes/Home";
 import RegForm from "./app/scenes/auth/RegForm";
 import ForgetPassForm from "./app/scenes/auth/ForgetPassForm";
-
+import MainPage from "./app/components/MainPage";
 import Profile from "./app/components/Profile";
 
 export default class App extends Component<Props> {

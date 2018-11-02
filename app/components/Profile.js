@@ -12,7 +12,7 @@ export default class Profile extends Component<Props> {
     render() {
         return (
             <ImageBackground
-                source={ require ('./Stellar.png')}
+                source={ require ('../components/Stellar.png')}
                 style={styles.Background}>
 
                 <TouchableOpacity>
