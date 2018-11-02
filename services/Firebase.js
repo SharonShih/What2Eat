@@ -1,3 +1,5 @@
+import * as firebase from 'firebase';
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAkg87RfcNKoEPRu9gRFdUYF1xFmH0jwt8",
@@ -7,4 +9,8 @@ var config = {
     storageBucket: "what2eat-9458a.appspot.com",
     messagingSenderId: "492067395907"
 };
+
+const Firebase = firebase.initializeApp(config);
+
+export default Firebase;
 

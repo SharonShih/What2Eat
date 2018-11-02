@@ -1,30 +1,53 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
-//import RegForm from "./app/components/RegForm.js";
-//import Profile from "./app/components/Profile.js";
-import MainPage from "./app/components/MainPage.js";
-type Props = {};
+import Firebase from "./services/Firebase.js";
+
+import SignInForm from "./app/scenes/auth/SignInForm";
+import Home from "./app/scenes/Home";
+import RegForm from "./app/scenes/auth/RegForm";
+import ForgetPassForm from "./app/scenes/auth/ForgetPassForm";
+
+import Profile from "./app/components/Profile";
+
 export default class App extends Component<Props> {
-  render() {
-    return (
-        <View style = {styles.container}>
-            <MainPage />
-        </View>
-    );
-  }
+
+    constructor(props) {
+        super(props);
+        this.state = ({
+            isAuthenticated: false,
+        });
+        Firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
+    }
+
+    onAuthStateChanged = (user) => {
+        this.setState({isAuthenticated: !!user});
+    }
+
+    render() {
+        return (
+            <View style = { styles.container }>
+                {(this.state.isAuthenticated) ? <Home /> : <AuthStackNavigator />}
+            </View>
+        );
+    }
 }
+
+
+const AuthStackNavigator = createStackNavigator ({
+    SignInForm: { screen: SignInForm },
+    RegForm: { screen: RegForm },
+    Home: { screen: Home },
+    ForgetPassForm: { screen: ForgetPassForm },
+})
 
 const styles = StyleSheet.create({
     container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#336699',
-  },
-
-
-
-
-});
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        backgroundColor: '#336699',
+    },
+})
