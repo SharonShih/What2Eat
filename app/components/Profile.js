@@ -11,8 +11,9 @@ type Props = {};
 export default class Profile extends Component<Props> {
     render() {
         return (
+
             <ImageBackground
-                source={ require ('../components/Stellar.png')}
+                source={ require ('./Stellar.png')}
                 style={styles.Background}>
 
                 <TouchableOpacity>
@@ -63,7 +64,9 @@ export default class Profile extends Component<Props> {
                         </View>
                     </View>
                 </View>
+
             </ImageBackground>
+
         );
     }
 }

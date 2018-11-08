@@ -12,6 +12,8 @@ import ForgetPassForm from "./app/scenes/auth/ForgetPassForm";
 import MainPage from "./app/components/MainPage";
 import Profile from "./app/components/Profile";
 
+
+
 export default class App extends Component<Props> {
 
     constructor(props) {
@@ -29,6 +31,7 @@ export default class App extends Component<Props> {
     render() {
         return (
             <View style = { styles.container }>
+
                 {(this.state.isAuthenticated) ? <Home /> : <AuthStackNavigator />}
             </View>
         );
@@ -42,6 +45,7 @@ const AuthStackNavigator = createStackNavigator ({
     Home: { screen: Home },
     ForgetPassForm: { screen: ForgetPassForm },
 })
+
 
 const styles = StyleSheet.create({
     container: {
