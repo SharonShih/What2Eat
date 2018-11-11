@@ -4,6 +4,7 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import RegForm from "./app/scenes/RegForm.js";
 import firebase from "./services/firebase.js";
+import ChooseFavorite from "./app/scenes/ChooseFavorite.js"
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -13,8 +14,8 @@ export default class App extends Component<Props> {
 
   render() {
     return (
-        <View style = {styles.container}>
-          <RegForm />
+        <View >
+          <ChooseFavorite/>
         </View>
     );
   }
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#12c2e9',
-    paddingLeft: 60,
-    paddingRight: 60,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
