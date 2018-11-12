@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Firebase from '../../services/Firebase';
+import 'firebase/firestore';
+
 import {
   StyleSheet,
   Text,
@@ -20,7 +23,18 @@ export default class MainPage extends Component<Props> {
         latitude: 0,
         longitude: 0,
       }
-    }
+    };
+      var checkUidExist=()=>{
+          let uid = Firebase.auth().currentUser.uid;
+          var db=Firebase.firestore(Firebase);
+          Alert.alert(uid);
+          db.settings({
+              timestampsInSnapshots: true
+          });
+          !db.collection("users").doc(uid).get()
+              .then ( () => {this.props.navigation.navigate('ChooseFavorite');});
+      };
+      checkUidExist();
   }
 
   componentDidMount() {
@@ -30,7 +44,7 @@ export default class MainPage extends Component<Props> {
       var initialRegion = {
         latitude: lat,
         longitude: long,
-      }
+      };
       this.setState({initialPosition: initialRegion})
     }, (error) => {
       Alert.alert(error.message);

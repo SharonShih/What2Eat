@@ -3,7 +3,7 @@ import FavorText from '../components/FavorityText';
 import FoodPicture from '../components/FoodPicture';
 import Firebase from '../../services/Firebase';
 import 'firebase/firestore';
-import * as firebase from 'firebase';
+
 
 import {
     StyleSheet,
@@ -21,6 +21,10 @@ export default class HelloWorldApp extends Component {
         this.state ={
 
         }
+    }
+
+    static navigationOptions = {
+        header: null
     }
 
     AddItemsToArray = (food) => {
@@ -45,6 +49,7 @@ export default class HelloWorldApp extends Component {
                 visited_restaurant: [],
             }
         );
+
         //Alert.alert(uid)
 
     }

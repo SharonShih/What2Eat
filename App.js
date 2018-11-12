@@ -10,7 +10,7 @@ import RegForm from "./app/scenes/auth/RegForm";
 import ForgetPassForm from "./app/scenes/auth/ForgetPassForm";
 import MainPage from "./app/components/MainPage";
 import Profile from "./app/components/Profile";
-
+import ChooseFavorite from './app/scenes/ChooseFavorite';
 
 
 export default class App extends Component<Props> {
@@ -30,9 +30,8 @@ export default class App extends Component<Props> {
 
     render() {
         return (
-            <View style = { styles.container }>
-
-                {(this.state.isAuthenticated) ? <Home /> : <AuthStackNavigator />}
+            <View style={styles.container}>
+                {(this.state.isAuthenticated) ? <RootStackNavigator/> : <AuthStackNavigator/>}
             </View>
         );
     }
@@ -40,24 +39,25 @@ export default class App extends Component<Props> {
 
 
 const AuthStackNavigator = createStackNavigator({
-  SignInForm: {screen: SignInForm},
-  RegForm: {screen: RegForm},
-  Home: {screen: Home},
-  ForgetPassForm: {screen: ForgetPassForm},
-  MainPage: {screen: MainPage},
+    SignInForm: {screen: SignInForm},
+    RegForm: {screen: RegForm},
+    Home: {screen: Home},
+    ForgetPassForm: {screen: ForgetPassForm},
+    MainPage: {screen: MainPage},
 })
 
 const RootStackNavigator = createStackNavigator({
-  Profile: {screen: Profile},
-  MainPage: {screen: MainPage},
+    MainPage: {screen: MainPage},
+    Profile: {screen: Profile},
+    ChooseFavorite: {screen: ChooseFavorite},
 })
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: '#336699',
-  },
+    container: {
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        backgroundColor: '#336699',
+    },
 })
