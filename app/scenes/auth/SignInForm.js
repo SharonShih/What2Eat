@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, Alert} from 'react-native';
-
 import Firebase from '../../../services/Firebase';
 
 export default class SignInForm extends Component<Props> {
