@@ -11,8 +11,8 @@ import {
 
 const FoodPicture=(props)=>{
     return(
-            <TouchableOpacity >
-                <Image style={styles.imageOffood} source={props.FoodPicture}/>
+            <TouchableOpacity onPress={props.onPress}>
+                <Image style={styles.imageOffood} source={props.FoodPicture} onPress={()=>props.onPress}/>
             </TouchableOpacity>
     )
 }

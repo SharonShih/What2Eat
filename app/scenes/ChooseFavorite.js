@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import FavorText from '../components/FavorityText';
 import FoodPicture from '../components/FoodPicture';
+import Firebase from '../../services/Firebase';
+import 'firebase/firestore';
+import * as firebase from 'firebase';
 
 import {
     StyleSheet,
@@ -8,7 +11,7 @@ import {
     View,
     Button,
     Alert,
-    ImageBackground,
+    ImageBackground, TouchableOpacity,
 } from "react-native";
 
 var ArrayOfFood = [];
@@ -21,17 +24,29 @@ export default class HelloWorldApp extends Component {
     }
 
     AddItemsToArray = (food) => {
-        //TODO: add item to array
-        Alert.alert('123');
+        // add item to array
         ArrayOfFood.push(food);
         // Showing the complete Array on Screen Using Alert.
-        Alert.alert(ArrayOfFood.toString());
+        //Alert.alert(ArrayOfFood.toString());
     }
 
     onPressedSubmit= ( ) => {
         //TODO:store array to firebase
 
-        this.props.navigation.navigate("nextpage");
+        let uid = Firebase.auth().currentUser.uid;
+        var db=Firebase.firestore(Firebase);
+        db.settings({
+            timestampsInSnapshots: true
+        });
+        db.collection("users").doc(uid).set(
+            {
+                disliked_restaurant :[],
+                preference: ArrayOfFood,
+                visited_restaurant: [],
+            }
+        );
+        //Alert.alert(uid)
+
     }
     render() {
         const JapaneseImag={
@@ -69,29 +84,27 @@ export default class HelloWorldApp extends Component {
                 <FavorText FavorText={' Choose three Food You like '}/>
 
                 <View style={styles.imageLayout}>
-                    <FoodPicture FoodPicture={JapaneseImag} onPress={this.AddItemsToArray('Japanese')}/>
-                    <FoodPicture FoodPicture={MexicanImag} />
-                    <FoodPicture FoodPicture={AmricanImag}/>
-                    <FoodPicture FoodPicture={KoreanImag}/>
-                    <FoodPicture FoodPicture={FastFood}/>
-                    <FoodPicture FoodPicture={SeaFood}/>
-                    <FoodPicture FoodPicture={ChineseFood}/>
-                    <FoodPicture FoodPicture={ItalianFood}/>
-                    <FoodPicture FoodPicture={Desert}/>
+
+                    <FoodPicture FoodPicture={JapaneseImag} onPress={() =>this.AddItemsToArray('Japanese')}/>
+                    <FoodPicture FoodPicture={MexicanImag} onPress={() =>this.AddItemsToArray('Mexican')}/>
+                    <FoodPicture FoodPicture={AmricanImag}onPress={() =>this.AddItemsToArray('Amrican')}/>
+                    <FoodPicture FoodPicture={KoreanImag}onPress={() =>this.AddItemsToArray('Korean')}/>
+                    <FoodPicture FoodPicture={FastFood}onPress={() =>this.AddItemsToArray('FastFood')}/>
+                    <FoodPicture FoodPicture={SeaFood}onPress={() =>this.AddItemsToArray('SeaFood')}/>
+                    <FoodPicture FoodPicture={ChineseFood}onPress={() =>this.AddItemsToArray('ChineseFood')}/>
+                    <FoodPicture FoodPicture={ItalianFood}onPress={() =>this.AddItemsToArray('ItalianFood')}/>
+                    <FoodPicture FoodPicture={Desert}onPress={() =>this.AddItemsToArray('Desert')}/>
                 </View>
 
                 <View style={styles.submit}>
-                    <Button  onPress={() => {
-                        // Alert.alert("Submit success");
+                    <Button  onPress={() => this.onPressedSubmit()
                         //TODO: natvigagte to next page and pass array
-                        onPressedSubmit()
-                        }}
+                        }
                             title="Sumbit"
                             color={'white'}
                     >
                     </Button>
                 </View>
-                <Text >End of page</Text>
 
             </ImageBackground>
         );
