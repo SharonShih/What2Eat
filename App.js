@@ -11,27 +11,31 @@ import ForgetPassForm from "./app/scenes/auth/ForgetPassForm";
 import MainPage from "./app/components/MainPage";
 import Profile from "./app/components/Profile";
 
+
+
 export default class App extends Component<Props> {
 
-  constructor(props) {
-    super(props);
-    this.state = ({
-      isAuthenticated: false,
-    });
-    Firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
-  }
 
-  onAuthStateChanged = (user) => {
-    this.setState({isAuthenticated: !!user});
-  }
+    constructor(props) {
+        super(props);
+        this.state = ({
+            isAuthenticated: false,
+        });
+        Firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
+    }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {(this.state.isAuthenticated) ? <RootStackNavigator/> : <AuthStackNavigator/>}
-      </View>
-    );
-  }
+    onAuthStateChanged = (user) => {
+        this.setState({isAuthenticated: !!user});
+    }
+
+    render() {
+        return (
+            <View style = { styles.container }>
+
+                {(this.state.isAuthenticated) ? <Home /> : <AuthStackNavigator />}
+            </View>
+        );
+    }
 }
 
 
@@ -47,6 +51,7 @@ const RootStackNavigator = createStackNavigator({
   Profile: {screen: Profile},
   MainPage: {screen: MainPage},
 })
+
 
 const styles = StyleSheet.create({
   container: {

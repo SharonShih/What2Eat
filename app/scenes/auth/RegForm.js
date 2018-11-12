@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Alert} from "react-native";
+import {StyleSheet, Text, TextInput, View, Button, Alert, ImageBackground, TouchableHighlight} from "react-native";
 import Firebase from '../../../services/Firebase';
 import MainPage from "../../components/MainPage";
 
@@ -28,11 +28,21 @@ export default class RegForm extends Component<Props> {
 
     render() {
         return (
+            <ImageBackground
+                source={ require ('../../components/Stellar.png')}
+                style={styles.Background}>
+
+
+                <Text style={styles.logo}>What2Eat</Text>
+
+                <Text style={styles.welcomeTxt}>Create What2Eat Account!</Text>
+
+
             <View style = {styles.RegForm}>
-                <Text style={styles.header}> Registration </Text>
                 <TextInput
                     style={styles.textInput}
-                    placeholder = "Please enter your email..."
+                    placeholder = "Email"
+                    placeholderTextColor="white"
                     keyboardType = "email-address"
                     autoCapitalize = "none"
                     autoCorrect = { false }
@@ -41,7 +51,8 @@ export default class RegForm extends Component<Props> {
                 />
                 <TextInput
                     style={styles.textInput}
-                    placeholder = "Please set up your password.."
+                    placeholder = "Password"
+                    placeholderTextColor="white"
                     secureTextEntry
                     autoCapitalize = "none"
                     autoCorrect = { false }
@@ -50,42 +61,96 @@ export default class RegForm extends Component<Props> {
                 />
                 <TextInput
                     style={styles.textInput}
-                    placeholder = "Please confirm your password.."
+                    placeholder = "Confirm Password"
+                    placeholderTextColor="white"
                     secureTextEntry
                     autoCapitalize = "none"
                     autoCorrect = { false }
                     onChangeText={passwordConfirm  => this.setState({ passwordConfirm })}
                     value = {this.state.passwordConfirm}
                 />
+
+                <TouchableHighlight
+                    style ={styles.signupButton}>
+
                 <Button
                     title= "Sign Up"
+                    color="#5A6978"
                     onPress={() => this.onPressSignUp()} />
+
+                </TouchableHighlight>
+
+
             </View>
+
+            </ImageBackground>
         );
     }
 }
 
+
+
 const styles = StyleSheet.create({
+
     RegForm: {
         alignSelf: 'stretch',
     },
-    header: {
-        fontSize: 24,
-        color: "#FFF",
-        paddingBottom: 10,
-        marginBottom: 40,
-        borderBottomColor: "#000000",
-        borderBottomWidth: 1,
-        fontWeight: 'bold',
-    },
+
+
     textInput: {
         alignSelf: 'stretch',
         fontSize: 18,
         color: "#FFF",
-        marginBottom: 30,
-        height: 40,
+        marginBottom: 20,
+        height: 30,
         borderBottomColor: "#FFF",
         borderBottomWidth: 1,
+        marginHorizontal: 55,
+
+    },
+
+    Background: {
+        width: '100%',
+        height: '100%',
+    },
+
+
+    welcomeTxt: {
+        letterSpacing: 1,
+        color:"#FFFFFF",
+        fontSize: 20,
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+
+    logo: {
+        color: '#FFFFFF',
+        fontFamily: 'Arial',
+        fontSize: 21,
+        fontWeight: "900",
+        textAlign: 'center',
+
+        marginTop: 56,
+        marginBottom: 19.5,
+
+        borderStyle: "solid",
+        borderColor: '#FFFFFF',
+        borderWidth: 4,
+
+        paddingTop: 50,
+        paddingBottom: 50,
+
+        marginRight:120,
+        marginLeft:120,
+    },
+
+    signupButton: {
+        height: 45,
+        width: 280,
+        borderRadius: 10,
+        backgroundColor: "white",
+        marginLeft: 50,
+        marginRight: 50,
     }
 });
 

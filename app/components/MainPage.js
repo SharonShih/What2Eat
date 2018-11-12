@@ -12,6 +12,14 @@ import {
 type Props = {};
 export default class MainPage extends Component<Props> {
 
+
+    render() {
+        return (
+            <ImageBackground  source={ require ('./Stellar.png')}
+                style={styles.Background}>
+                <Text style = {styles.circleText}>What to{"\n"}Eat Today?</Text>
+
+
   constructor(props) {
     super(props);
     this.state = {
