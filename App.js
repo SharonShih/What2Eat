@@ -1,7 +1,6 @@
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import {Platform, StyleSheet, Text, View,} from 'react-native';
+import {createStackNavigator} from 'react-navigation';
 
 import Firebase from "./services/Firebase.js";
 
@@ -15,6 +14,7 @@ import Profile from "./app/components/Profile";
 
 
 export default class App extends Component<Props> {
+
 
     constructor(props) {
         super(props);
@@ -39,19 +39,25 @@ export default class App extends Component<Props> {
 }
 
 
-const AuthStackNavigator = createStackNavigator ({
-    SignInForm: { screen: SignInForm },
-    RegForm: { screen: RegForm },
-    Home: { screen: Home },
-    ForgetPassForm: { screen: ForgetPassForm },
+const AuthStackNavigator = createStackNavigator({
+  SignInForm: {screen: SignInForm},
+  RegForm: {screen: RegForm},
+  Home: {screen: Home},
+  ForgetPassForm: {screen: ForgetPassForm},
+  MainPage: {screen: MainPage},
+})
+
+const RootStackNavigator = createStackNavigator({
+  Profile: {screen: Profile},
+  MainPage: {screen: MainPage},
 })
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignSelf: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: '#336699',
-    },
+  container: {
+    flex: 1,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    backgroundColor: '#336699',
+  },
 })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, TextInput, View, Button, Alert, ImageBackground, TouchableHighlight} from "react-native";
 import Firebase from '../../../services/Firebase';
+import MainPage from "../../components/MainPage";
 
 export default class RegForm extends Component<Props> {
 
@@ -19,7 +20,7 @@ export default class RegForm extends Component<Props> {
         }
         Firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
-                this.props.navigation.navigate('Home');
+                this.props.navigation.navigate('MainPage');
         }, (error) => {
             Alert.alert(error.message)
         });
