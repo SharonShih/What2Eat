@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Header,Left,Right,Icon} from 'native-base'
 import {
     StyleSheet,
     Text,
@@ -7,19 +8,25 @@ import {
     ImageBackground,
 } from "react-native";
 
+
 type Props = {};
 export default class Profile extends Component<Props> {
+    static navigationOptions={
+        drawerIcon:({tintColor})=>(
+            <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
+        )
+    }
     render() {
-        return (
 
+        return (
             <ImageBackground
                 source={ require ('./Stellar.png')}
                 style={styles.Background}>
-
-                <TouchableOpacity>
-                    <Text style = {styles.button}>&#8249; Back</Text>
-                </TouchableOpacity>
-
+                <Header>
+                    <Left>
+                        <Icon name={'menu'} onPress={()=>this.props.navigation.openDrawer()}/>
+                    </Left>
+                </Header>
                 <View style = {styles.ProfileForm}>
                     <Text style={styles.header}>Your Profile </Text>
                     <View style ={styles.avatar}></View>
@@ -64,12 +71,11 @@ export default class Profile extends Component<Props> {
                         </View>
                     </View>
                 </View>
-
             </ImageBackground>
-
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     ProfileForm: {
@@ -152,7 +158,6 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 10,
         marginBottom: 10,
-
     },
 
 

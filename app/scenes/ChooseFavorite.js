@@ -49,7 +49,7 @@ export default class HelloWorldApp extends Component {
                 visited_restaurant: [],
             }
         );
-
+        this.props.navigation.navigate('MainPage')
         //Alert.alert(uid)
 
     }
