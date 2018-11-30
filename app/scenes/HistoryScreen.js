@@ -14,6 +14,7 @@ class HistoryScreen extends Component{
             <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
         )
     }
+
     render()
     {
         return (
