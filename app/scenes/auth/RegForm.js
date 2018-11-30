@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, TextInput, View, Button, Alert, ImageBackground, TouchableHighlight} from "react-native";
 import Firebase from '../../../services/Firebase';
-import MainPage from "../../components/MainPage";
+import MainPage from "../MainPage";
 
 export default class RegForm extends Component<Props> {
 
