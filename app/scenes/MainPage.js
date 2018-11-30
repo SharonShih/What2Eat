@@ -11,9 +11,16 @@ import {
   TouchableOpacity, ImageBackground,
   Alert
 } from "react-native";
+import {Header, Icon, Left, Right} from "native-base";
 
 type Props = {};
 export default class MainPage extends Component<Props> {
+
+  static navigationOptions={
+    drawerIcon:({tintColor})=>(
+      <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
+    )
+  }
 
   constructor(props) {
     super(props);
@@ -24,17 +31,19 @@ export default class MainPage extends Component<Props> {
         longitude: 0,
       }
     };
-      var checkUidExist=()=>{
-          let uid = Firebase.auth().currentUser.uid;
-          var db=Firebase.firestore(Firebase);
-          Alert.alert(uid);
-          db.settings({
-              timestampsInSnapshots: true
-          });
-          !db.collection("users").doc(uid).get()
-              .then ( () => {this.props.navigation.navigate('ChooseFavorite');});
-      };
-      checkUidExist();
+    var checkUidExist = () => {
+      let uid = Firebase.auth().currentUser.uid;
+      var db = Firebase.firestore(Firebase);
+//      Alert.alert(uid);
+      db.settings({
+        timestampsInSnapshots: true
+      });
+      !db.collection("users").doc(uid).get()
+        .then(() => {
+          this.props.navigation.navigate('ChooseFavorite');
+        });
+    };
+    checkUidExist();
   }
 
   componentDidMount() {
@@ -47,7 +56,7 @@ export default class MainPage extends Component<Props> {
       };
       this.setState({initialPosition: initialRegion})
     }, (error) => {
-      Alert.alert(error.message);
+       Alert.alert(error.message);
     })
   }
 
@@ -62,15 +71,18 @@ export default class MainPage extends Component<Props> {
     return (
       <ImageBackground source={require('../components/Stellar.png')}
                        style={styles.Background}>
+        <Header>
+          <Left>
+            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
+          </Left>
+        </Header>
+        <View>
         <Text style={styles.circleText}>What to{"\n"}Eat Today?</Text>
-
         <View style={styles.outerCircle}>
           <TouchableOpacity onPress ={this.onPressSearchTarget}><View style={styles.circle}>
           </View></TouchableOpacity>
-
-
         </View>
-
+        </View>
       </ImageBackground>
 
     );
@@ -78,11 +90,6 @@ export default class MainPage extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  ProfileForm: {
-    alignSelf: 'stretch',
-    paddingLeft: 30,
-    paddingRight: 30,
-  },
   Background: {
     width: '100%',
     height: '100%',
@@ -117,43 +124,5 @@ const styles = StyleSheet.create({
     paddingLeft: 120,
 
   },
-  header: {
-    fontSize: 25,
-    color: "#FFF",
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 5,
-    marginTop: 5,
-  },
-  infoTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFF',
-    marginBottom: 10,
-  },
-  infoBox: {
-    marginBottom: 20,
-    height: 40,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderBottomColor: '#FFF',
-    borderBottomWidth: 0.5,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-  },
-  info: {
-    fontSize: 20,
-    color: '#FFF',
-  },
-  button: {
-    color: '#FFF',
-    opacity: 0.7,
-    textAlign: 'left',
-    fontSize: 23,
-    marginLeft: 20,
-    marginTop: 40,
-  },
-
 
 });

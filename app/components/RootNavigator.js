@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation';
-
 import 'firebase/firestore';
 import {Image,
-    StyleSheet,
-    TouchableOpacity,
     View,
     SafeAreaView,
     ScrollView,
     Dimensions} from "react-native";
 import HistoryScreen from '../scenes/HistoryScreen';
-import Profile from './Profile'
+import Profile from '../scenes/Profile';
+import MainPage from '../scenes/MainPage';
+import Home from '../scenes/Home'
 
-const Navigator =()=>{
+const RootNavigator =()=>{
     return(
         <AppDrawerNavigator/>
     )
@@ -29,8 +28,10 @@ const CustomDrawComponent=(props)=>(
     </SafeAreaView>
 )
 const AppDrawerNavigator =createDrawerNavigator({
+    MainPage: MainPage,
     Profile: Profile,
     History: HistoryScreen,
+    Home: Home,
 },{
     contentComponent: CustomDrawComponent,
     contentOptions: {
@@ -39,4 +40,4 @@ const AppDrawerNavigator =createDrawerNavigator({
 })
 
 
-export default Navigator;
+export default RootNavigator;
