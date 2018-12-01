@@ -10,11 +10,13 @@ export default class YelpSearchRequest extends Component<Props> {
         this.state = {
             isLoading: true,
             dataSource: null,
+            searchInfo: this.props.navigation.getParam('searchInfo', '')
         }
     }
 
     componentDidMount () {
-        return fetch('https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=37.452709&longitude=-121.910187&radius=400', {
+       // Alert.alert(this.state.searchInfo);
+        return fetch(this.state.searchInfo, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + YelpAuth,
