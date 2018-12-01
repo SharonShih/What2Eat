@@ -35,7 +35,7 @@ export default class HelloWorldApp extends Component {
     }
 
     onPressedSubmit= ( ) => {
-        //TODO:store array to firebase
+
 
         let uid = Firebase.auth().currentUser.uid;
         var db=Firebase.firestore(Firebase);

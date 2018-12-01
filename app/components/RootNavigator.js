@@ -37,7 +37,8 @@ const AppDrawerNavigator =createDrawerNavigator({
     contentOptions: {
         activateTintColor:'orange'
     }
-})
+});
+
 
 
 export default RootNavigator;

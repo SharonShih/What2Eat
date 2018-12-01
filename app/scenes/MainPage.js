@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Firebase from '../../services/Firebase';
 import 'firebase/firestore';
 
+
 import {
   StyleSheet,
   Text,
@@ -12,6 +13,8 @@ import {
   Alert
 } from "react-native";
 import {Header, Icon, Left, Right} from "native-base";
+
+import ChooseFavorite from './ChooseFavorite';
 
 type Props = {};
 export default class MainPage extends Component<Props> {
@@ -31,19 +34,21 @@ export default class MainPage extends Component<Props> {
         longitude: 0,
       }
     };
-    var checkUidExist = () => {
-      let uid = Firebase.auth().currentUser.uid;
-      var db = Firebase.firestore(Firebase);
-//      Alert.alert(uid);
-      db.settings({
-        timestampsInSnapshots: true
-      });
-      !db.collection("users").doc(uid).get()
-        .then(() => {
-          this.props.navigation.navigate('ChooseFavorite');
-        });
-    };
-    checkUidExist();
+      var checkUidExist = () => {
+          let uid = Firebase.auth().currentUser.uid;
+          var db = Firebase.firestore(Firebase);
+     //Alert.alert(uid);
+          db.settings({
+              timestampsInSnapshots: true
+          });
+          //this.props.navigation.navigate('ChooseFavorite');
+          db.collection("users").doc(uid).get()
+              .then(() => {
+                  Alert.alert(uid);
+                  this.props.navigation.navigate('ChooseFavorite');
+              });
+      };
+      checkUidExist();
   }
 
   componentDidMount() {
@@ -68,6 +73,7 @@ export default class MainPage extends Component<Props> {
   }
 
   render() {
+
     return (
       <ImageBackground source={require('../components/Stellar.png')}
                        style={styles.Background}>
