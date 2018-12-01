@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View,} from 'react-native';
 import Firebase from "./services/Firebase.js";
-import RootNavigator from './app/components/RootNavigator';
+import { AppDrawerNavigator } from './app/components/RootNavigator';
 import AuthStackNavigator from './app/components/AuthStackNavigator';
-import Home from './app/scenes/Home';
 
 export default class App extends Component<Props> {
 
@@ -23,13 +22,11 @@ export default class App extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                {(this.state.isAuthenticated) ? <RootNavigator/> : <AuthStackNavigator/>}
+                {(this.state.isAuthenticated) ? <AppDrawerNavigator/> : <AuthStackNavigator/>}
             </View>
         );
     }
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

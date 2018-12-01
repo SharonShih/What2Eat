@@ -11,11 +11,11 @@ import {
 
 type Props = {};
 export default class Profile extends Component<Props> {
-    static navigationOptions={
-        drawerIcon:({tintColor})=>(
-            <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
-        )
-    }
+  static navigationOptions={
+    drawerIcon:({tintColor})=>(
+      <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
+    )
+  }
     render() {
 
         return (
