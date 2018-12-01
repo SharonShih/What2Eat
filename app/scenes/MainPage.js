@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Firebase from '../../services/Firebase';
 import 'firebase/firestore';
 
-
 import {
   StyleSheet,
   Text,
@@ -13,8 +12,6 @@ import {
   Alert
 } from "react-native";
 import {Header, Icon, Left, Right} from "native-base";
-
-import ChooseFavorite from './ChooseFavorite';
 
 type Props = {};
 export default class MainPage extends Component<Props> {
@@ -28,34 +25,40 @@ export default class MainPage extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      radius: 0,
+      radius: 400,
       initialPosition: {
         latitude: 0,
         longitude: 0,
       }
     };
-      var checkUidExist = () => {
-          let uid = Firebase.auth().currentUser.uid;
-          var db = Firebase.firestore(Firebase);
-     //Alert.alert(uid);
-          db.settings({
-              timestampsInSnapshots: true
-          });
-          //this.props.navigation.navigate('ChooseFavorite');
-          db.collection("users").doc(uid).get()
-              .then(() => {
-                  Alert.alert(uid);
-                  this.props.navigation.navigate('ChooseFavorite');
-              });
-      };
-      checkUidExist();
+
+      // var checkUidExist = () => {
+      //   let uid = Firebase.auth().currentUser.uid;
+      //   var db = Firebase.firestore(Firebase);
+      //   Alert.alert(uid);
+      //   db.settings({
+      //     timestampsInSnapshots: true
+      //   });
+      //   var docRef = db.collection("users").doc(uid);
+      //   docRef.get().then(function(doc) {
+      //     if (doc.exists) {
+      //       Alert.alert("yes");
+      //     } else {
+      //       Alert.alert("no");
+      //       this.props.navigation.navigate('SearchDisplayPage');
+      //     }
+      //   }).catch(function(error) {
+      //     console.log("Error getting document:", error);
+      //   });
+      // };
+      // checkUidExist();
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
-      var lat = parseFloat(position.coords.latitude)
-      var long = parseFloat(position.coords.longitude)
-      var initialRegion = {
+      let lat = parseFloat(position.coords.latitude)
+      let long = parseFloat(position.coords.longitude)
+      let initialRegion = {
         latitude: lat,
         longitude: long,
       };
@@ -66,10 +69,12 @@ export default class MainPage extends Component<Props> {
   }
 
   onPressSearchTarget() {
-    var searchInfo = 'https://api.yelp.com/v3/businesses/search?term=restaurants&latitude='
+    let searchInfo = 'https://api.yelp.com/v3/businesses/search?term=restaurants&latitude='
       + this.state.initialPosition.latitude + '&longitude=' + this.state.initialPosition.longitude
       + '&radius=' + this.state.radius;
-    this.props.navigation.navigate('DisplayInfo', searchInfo = {searchInfo});
+     Alert.alert(searchInfo);
+    this.props.navigation.navigate('YelpSearchRequest', searchInfo = {searchInfo});
+//    this.props.navigation.navigate('DisplayInfo', searchInfo = {searchInfo});
   }
 
   render() {
@@ -79,13 +84,13 @@ export default class MainPage extends Component<Props> {
                        style={styles.Background}>
         <Header>
           <Left>
-            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
+            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer() }/>
           </Left>
         </Header>
         <View>
         <Text style={styles.circleText}>What to{"\n"}Eat Today?</Text>
         <View style={styles.outerCircle}>
-          <TouchableOpacity onPress ={this.onPressSearchTarget}><View style={styles.circle}>
+          <TouchableOpacity onPress ={this.onPressSearchTarget.bind(this)}><View style={styles.circle}>
           </View></TouchableOpacity>
         </View>
         </View>

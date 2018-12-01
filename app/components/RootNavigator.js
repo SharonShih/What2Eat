@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createDrawerNavigator, DrawerItems} from 'react-navigation';
+import {createDrawerNavigator, createStackNavigator, DrawerItems,} from 'react-navigation';
 import 'firebase/firestore';
 import {Image,
     View,
@@ -10,12 +10,10 @@ import HistoryScreen from '../scenes/HistoryScreen';
 import Profile from '../scenes/Profile';
 import MainPage from '../scenes/MainPage';
 import Home from '../scenes/Home'
-
-const RootNavigator =()=>{
-    return(
-        <AppDrawerNavigator/>
-    )
-};
+import SearchDisplayPage from '../scenes/SearchDisplayPage';
+import ChooseFavorite from '../scenes/ChooseFavorite';
+import {Icon} from "native-base";
+import YelpSearchRequest from "./YelpSearchRequest";
 
 const CustomDrawComponent=(props)=>(
     <SafeAreaView style={{flex: 1}}>
@@ -27,8 +25,26 @@ const CustomDrawComponent=(props)=>(
         </ScrollView>
     </SafeAreaView>
 )
-const AppDrawerNavigator =createDrawerNavigator({
-    MainPage: MainPage,
+
+export const AppStackNavigator =  createStackNavigator({
+  MainPage: MainPage,
+  SearchDisplayPage: SearchDisplayPage,
+  ChooseFavorite: ChooseFavorite,
+  History: HistoryScreen,
+  YelpSearchRequest: YelpSearchRequest
+}, {
+  initialPage: 'MainPage',
+  headerMode: 'none',
+  navigationOptions: { header: { visible: false } } // ADDED THIS
+});
+
+export const AppDrawerNavigator =createDrawerNavigator({
+    MainPage: {screen: AppStackNavigator,
+      navigationOptions: {
+        drawerIcon:({tintColor})=>(
+          <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
+        )
+      }},
     Profile: Profile,
     History: HistoryScreen,
     Home: Home,
@@ -40,5 +56,3 @@ const AppDrawerNavigator =createDrawerNavigator({
 });
 
 
-
-export default RootNavigator;
