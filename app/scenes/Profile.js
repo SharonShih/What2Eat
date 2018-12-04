@@ -5,18 +5,55 @@ import {
     Text,
     View,
     TouchableOpacity,
-    ImageBackground,
+    ImageBackground, Alert,
 } from "react-native";
+import Firebase from "../../services/Firebase";
 
 
 type Props = {};
 export default class Profile extends Component<Props> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            uid: Firebase.auth().currentUser.uid,
+            email: Firebase.auth().currentUser.email,
+            isLoading: true,
+            dataSource: null,
+        }
+    }
   static navigationOptions={
     drawerIcon:({tintColor})=>(
       <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
     )
   }
+    componentDidMount() {
+        let db=Firebase.firestore(Firebase);
+        db.settings({
+            timestampsInSnapshots: true
+        });
+        var docRef = db.collection("users").doc(this.state.uid);
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                this.setState({
+                    isLoading: false,
+                    dataSource: doc.data(),
+                });
+                let movies = this.state.dataSource.map((val, key) => {
+                    return <View key={key} style={styles.item}><Text>{val.preference}</Text></View>
+                });
+                Alert.alert(movies);
+            } else {
+                // doc.data() will be undefined in this case
+                Alert.alert("sha bi o ");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+            Alert.alert(error);
+        });
+    }
     render() {
+
 
         return (
             <ImageBackground
@@ -33,16 +70,16 @@ export default class Profile extends Component<Props> {
 
                     <Text style = {styles.infoTitle}>Account ID</Text>
                     <View style = {styles.infoBox}>
-                        <Text style={styles.info}>helloworld12345 </Text>
+                        <Text style={styles.info}> {this.state.uid}</Text>
                     </View>
                     <Text style = {styles.infoTitle}>Email</Text>
                     <View style = {styles.infoBox}>
-                        <Text style = {styles.info}>amy_cooper12345@gmail.com</Text>
+                        <Text style = {styles.info}>{this.state.email}</Text>
                     </View>
                     <Text style = {styles.infoTitle}>Your Tags</Text>
                     <View style =  {{flexDirection: 'row', flexWrap: 'wrap'}}>
                         <View style =  {{flexDirection: 'row'}}>
-                            <View style = {styles.chips}><Text style = {styles.chipText}>Chinese</Text>
+                            <View style = {styles.chips}><Text style = {styles.chipText}>nonno</Text>
                                 <TouchableOpacity>
                                     <Text style={styles.chipButton}>&times;</Text>
                                 </TouchableOpacity>
@@ -63,7 +100,7 @@ export default class Profile extends Component<Props> {
                             </View>
                         </View>
                         <View style =  {{flexDirection: 'row'}}>
-                            <View style = {styles.chips}><Text style = {styles.chipText}>Vegan</Text>
+                            <View style = {styles.chips}><Text style = {styles.chipText}>Edit</Text>
                                 <TouchableOpacity>
                                     <Text style={styles.chipButton}>&times;</Text>
                                 </TouchableOpacity>
