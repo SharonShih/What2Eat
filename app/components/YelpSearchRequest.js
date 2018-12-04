@@ -15,7 +15,6 @@ export default class YelpSearchRequest extends Component<Props> {
     }
 
     componentDidMount () {
-       // Alert.alert(this.state.searchInfo);
         return fetch(this.state.searchInfo, {
             method: 'GET',
             headers: {
