@@ -18,7 +18,7 @@ export default class Profile extends Component<Props> {
     this.state = {
       uid: Firebase.auth().currentUser.uid,
       email: Firebase.auth().currentUser.email,
-      preference: tempArray
+      preference: []
     }
   }
 
@@ -41,12 +41,14 @@ export default class Profile extends Component<Props> {
         for (let index = 0; index < field.length ; index++ ) {
           tempArray.push(field[index]);
         }
+        this.setState({preference: tempArray})
+        console.log(tempArray);
       } else {
         // doc.data() will be undefined in this case
       }
-    }).catch(function (error) {
+    }.bind(this)).catch(function (error) {
       console.log("Error getting document:", error);
-    });
+    })
   }
 
   render() {
