@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import Firebase from "../../services/Firebase";
 
-
+//let field=[];
 type Props = {};
+
 export default class Profile extends Component<Props> {
     constructor(props) {
         super(props);
@@ -18,7 +19,7 @@ export default class Profile extends Component<Props> {
             uid: Firebase.auth().currentUser.uid,
             email: Firebase.auth().currentUser.email,
             isLoading: true,
-            dataSource: null,
+            dataSource: [],
         }
     }
   static navigationOptions={
@@ -26,34 +27,54 @@ export default class Profile extends Component<Props> {
       <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
     )
   }
-    componentDidMount() {
+    // componentDidMount() {
+    //     //let field=[];
+    //     let db=Firebase.firestore(Firebase);
+    //     db.settings({
+    //         timestampsInSnapshots: true
+    //     });
+    //     let docRef = db.collection("users").doc(this.state.uid);
+    //
+    //     docRef.get().then(function(doc) {
+    //         if (doc.exists) {
+    //             field = doc.get('preference').toString();
+    //
+    //             Alert.alert(field);
+    //         } else {
+    //             // doc.data() will be undefined in this case
+    //             Alert.alert("sha bi o ");
+    //         }
+    //     }).catch(function(error) {
+    //         console.log("Error getting document:", error);
+    //         Alert.alert(error);
+    //     });
+    // }
+    render() {
+        let field=[];
         let db=Firebase.firestore(Firebase);
         db.settings({
             timestampsInSnapshots: true
         });
-        var docRef = db.collection("users").doc(this.state.uid);
+         let docRef = db.collection("users").doc(this.state.uid);
 
-        docRef.get().then(function(doc) {
-            if (doc.exists) {
-                this.setState({
-                    isLoading: false,
-                    dataSource: doc.data(),
-                });
-                let movies = this.state.dataSource.map((val, key) => {
-                    return <View key={key} style={styles.item}><Text>{val.preference}</Text></View>
-                });
-                Alert.alert(movies);
-            } else {
-                // doc.data() will be undefined in this case
-                Alert.alert("sha bi o ");
+         docRef.get().then(function(doc) {
+             if (doc.exists) {
+                 field = doc.get('preference').toString();
+                 // this.setState({
+                 //     isLoading: false,
+                 //     dataSource:  field,
+                 //
+                 // })
+                 Alert.alert("the field is "+field);
+
+             }
+            else {
+                 Alert.alert("did not read");
             }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-            Alert.alert(error);
-        });
-    }
-    render() {
-
+         }).catch(function(error) {
+             console.log("Error getting document:", error);
+             Alert.alert(error);
+         });
 
         return (
             <ImageBackground
@@ -79,7 +100,7 @@ export default class Profile extends Component<Props> {
                     <Text style = {styles.infoTitle}>Your Tags</Text>
                     <View style =  {{flexDirection: 'row', flexWrap: 'wrap'}}>
                         <View style =  {{flexDirection: 'row'}}>
-                            <View style = {styles.chips}><Text style = {styles.chipText}>nonno</Text>
+                            <View style = {styles.chips}><Text style = {styles.chipText}>{field}</Text>
                                 <TouchableOpacity>
                                     <Text style={styles.chipButton}>&times;</Text>
                                 </TouchableOpacity>
