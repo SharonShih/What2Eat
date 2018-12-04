@@ -25,7 +25,7 @@ export default class ChooseFavorite extends Component<Props> {
 
   onPressedSubmit = () => {
     let uid = Firebase.auth().currentUser.uid;
-    var db = Firebase.firestore(Firebase);
+    let db = Firebase.firestore(Firebase);
     db.settings({
       timestampsInSnapshots: true
     });
