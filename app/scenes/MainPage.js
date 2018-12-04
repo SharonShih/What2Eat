@@ -77,7 +77,6 @@ export default class MainPage extends Component<Props> {
   }
 
   render() {
-
     return (
       <ImageBackground source={require('../components/Stellar.png')}
                        style={styles.Background}>

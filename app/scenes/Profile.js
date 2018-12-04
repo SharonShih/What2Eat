@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Header, Left, Right, Icon} from 'native-base'
 import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    ImageBackground, Alert, Button,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground, Alert,
 } from "react-native";
 import Firebase from "../../services/Firebase";
 
@@ -18,7 +18,7 @@ export default class Profile extends Component<Props> {
     this.state = {
       uid: Firebase.auth().currentUser.uid,
       email: Firebase.auth().currentUser.email,
-      preference: tempArray
+      preference: []
     }
   }
 
@@ -27,61 +27,31 @@ export default class Profile extends Component<Props> {
       <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
     )
   }
-    onPressedSubmit= ( ) => {
-
-        this.props.navigation.navigate('ChooseFavorite')
-        //Alert.alert(uid)
-
-    }
 
   componentDidMount() {
-    // let db = Firebase.firestore(Firebase);
-    // db.settings({
-    //   timestampsInSnapshots: true
-    // });
-    // let docRef = db.collection("users").doc(this.state.uid);
-    // docRef.get().then(function (doc) {
-    //   if (doc.exists) {
-    //     console.log(typeof tempArray);
-    //     let field = doc.get('preference');
-    //     for (let index = 0; index < field.length ; index++ ) {
-    //       tempArray.push(field[index]);
-    //     }
-    //     Alert.alert(tempArray[0]);
-    //     this.setState({
-    //         preference: tempArray,
-    //     })
-    //   } else {
-    //     // doc.data() will be undefined in this case
-    //   }
-    // }).catch(function (error) {
-    //   console.log("Error getting document:", error);
-    // });
+    let db = Firebase.firestore(Firebase);
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    let docRef = db.collection("users").doc(this.state.uid);
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
+        console.log(typeof tempArray);
+        let field = doc.get('preference');
+        for (let index = 0; index < field.length ; index++ ) {
+          tempArray.push(field[index]);
+        }
+        this.setState({preference: tempArray})
+        console.log(tempArray);
+      } else {
+        // doc.data() will be undefined in this case
+      }
+    }.bind(this)).catch(function (error) {
+      console.log("Error getting document:", error);
+    })
   }
 
   render() {
-      let db = Firebase.firestore(Firebase);
-      db.settings({
-          timestampsInSnapshots: true
-      });
-      let docRef = db.collection("users").doc(this.state.uid);
-      docRef.get().then(function (doc) {
-          if (doc.exists) {
-              console.log(typeof tempArray);
-              let field = doc.get('preference');
-              for (let index = 0; index < field.length ; index++ ) {
-                  tempArray.push(field[index]);
-              }
-              Alert.alert(tempArray[0]);
-              this.setState({
-                  preference: tempArray,
-              })
-          } else {
-              // doc.data() will be undefined in this case
-          }
-      }).catch(function (error) {
-          console.log("Error getting document:", error);
-      });
     return (
       <ImageBackground
         source={require('../components/Stellar.png')}
@@ -92,7 +62,7 @@ export default class Profile extends Component<Props> {
           </Left>
         </Header>
         <View style={styles.ProfileForm}>
-          <Text style={styles.header}> Profile </Text>
+          <Text style={styles.header}>Your Profile </Text>
           <View style={styles.avatar}></View>
 
           <Text style={styles.infoTitle}>Account ID</Text>
@@ -106,7 +76,7 @@ export default class Profile extends Component<Props> {
           <Text style={styles.infoTitle}>Your Tags</Text>
           <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
             <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>{this.state.preference[0]}</Text>
+              <View style={styles.chips}><Text style={styles.chipText}>{this.state.preference[2]}</Text>
                 <TouchableOpacity>
                   <Text style={styles.chipButton}>&times;</Text>
                 </TouchableOpacity>
@@ -120,29 +90,20 @@ export default class Profile extends Component<Props> {
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>Seafood</Text>
+              <View style={styles.chips}><Text style={styles.chipText}>Seafood Allergic</Text>
                 <TouchableOpacity>
                   <Text style={styles.chipButton}>&times;</Text>
                 </TouchableOpacity>
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>123</Text>
+              <View style={styles.chips}><Text style={styles.chipText}>Edit</Text>
                 <TouchableOpacity>
                   <Text style={styles.chipButton}>&times;</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
-            <View style={styles.submit}>
-                <Button  onPress={() => this.onPressedSubmit()
-                    //TODO: natvigagte to next page and pass array
-                }
-                         title="Edit"
-                         color={'white'}
-                >
-                </Button>
-            </View>
         </View>
       </ImageBackground>
     );
@@ -232,11 +193,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginBottom: 10,
   },
-    submit:{
-        borderColor:'white',
-        borderWidth: 1,
-        color:'white',
-    },
 
 
 });
