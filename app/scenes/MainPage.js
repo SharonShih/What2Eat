@@ -74,7 +74,6 @@ export default class MainPage extends Component<Props> {
       + '&radius=' + this.state.radius;
      Alert.alert(searchInfo);
     this.props.navigation.navigate('YelpSearchRequest', {searchInfo: searchInfo});
-//    this.props.navigation.navigate('DisplayInfo', searchInfo = {searchInfo});
   }
 
   render() {
