@@ -73,7 +73,7 @@ export default class MainPage extends Component<Props> {
       + this.state.initialPosition.latitude + '&longitude=' + this.state.initialPosition.longitude
       + '&radius=' + this.state.radius;
      Alert.alert(searchInfo);
-    this.props.navigation.navigate('YelpSearchRequest', {searchInfo: searchInfo});
+    this.props.navigation.navigate('SearchDisplayPage', {searchInfo: searchInfo});
   }
 
   render() {
