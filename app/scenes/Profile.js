@@ -68,16 +68,15 @@ export default class Profile extends Component<Props> {
             )
         }
         return (
-
             <ImageBackground
                 source={require('../components/Stellar.png')}
                 style={styles.Background}>
-                <ScrollView>
                     <Header>
                         <Left>
                             <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
                         </Left>
                     </Header>
+              <ScrollView>
                     <View style={styles.ProfileForm}>
                         <Text style={styles.header}>Your Profile </Text>
                         <View style={styles.avatar}></View>

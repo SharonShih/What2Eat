@@ -9,11 +9,11 @@ import {Image,
 import HistoryScreen from '../scenes/HistoryScreen';
 import Profile from '../scenes/Profile';
 import MainPage from '../scenes/MainPage';
-import Home from '../scenes/Home'
 import SearchDisplayPage from '../scenes/SearchDisplayPage';
 import ChooseFavorite from '../scenes/ChooseFavorite';
 import {Icon} from "native-base";
 import YelpSearchRequest from "./YelpSearchRequest";
+import Logout from '../scenes/Logout';
 
 const CustomDrawComponent=(props)=>(
     <SafeAreaView style={{flex: 1}}>
@@ -47,7 +47,7 @@ export const AppDrawerNavigator =createDrawerNavigator({
       }},
     Profile: Profile,
     History: HistoryScreen,
-    Home: Home,
+    Logout: Logout,
 },{
     contentComponent: CustomDrawComponent,
     contentOptions: {
