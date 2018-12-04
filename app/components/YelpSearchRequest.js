@@ -44,7 +44,6 @@ export default class YelpSearchRequest extends Component<Props> {
             });
             return (
                 <View style={styles.container}>
-
                     {movies}
                 </View>
             );
