@@ -49,8 +49,8 @@ export default class HelloWorldApp extends Component {
                 visited_restaurant: [],
             }
         );
+        ArrayOfFood = [];
         this.props.navigation.navigate('MainPage')
-        //Alert.alert(uid)
 
     }
     render() {

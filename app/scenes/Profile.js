@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import {Header, Left, Right, Icon} from 'native-base'
 import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ImageBackground, Alert,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    ImageBackground, Alert, Button,
 } from "react-native";
 import Firebase from "../../services/Firebase";
 
 
 type Props = {};
-var tempArray = [];
 export default class Profile extends Component<Props> {
   constructor(props) {
     super(props);
@@ -27,6 +26,9 @@ export default class Profile extends Component<Props> {
       <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
     )
   }
+    onPressedSubmit= ( ) => {
+        this.props.navigation.navigate('ChooseFavorite')
+    }
 
   componentDidMount() {
     let db = Firebase.firestore(Firebase);
@@ -36,6 +38,7 @@ export default class Profile extends Component<Props> {
     let docRef = db.collection("users").doc(this.state.uid);
     docRef.get().then(function (doc) {
       if (doc.exists) {
+          var tempArray = [];
         console.log(typeof tempArray);
         let field = doc.get('preference');
         for (let index = 0; index < field.length ; index++ ) {
@@ -52,6 +55,18 @@ export default class Profile extends Component<Props> {
   }
 
   render() {
+      var preferenceInfo = [];
+      for (let i = 0; i < this.state.preference.length; i++) {
+          preferenceInfo.push(
+              <View style={{flexDirection: 'row'}}>
+                  <View style={styles.chips}><Text style={styles.chipText}>{this.state.preference[i]}</Text>
+                      <TouchableOpacity>
+                          <Text style={styles.chipButton}>&times;</Text>
+                      </TouchableOpacity>
+                  </View>
+              </View>
+          )
+      }
     return (
       <ImageBackground
         source={require('../components/Stellar.png')}
@@ -75,35 +90,13 @@ export default class Profile extends Component<Props> {
           </View>
           <Text style={styles.infoTitle}>Your Tags</Text>
           <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-            <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>{this.state.preference[2]}</Text>
-                <TouchableOpacity>
-                  <Text style={styles.chipButton}>&times;</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>Japanese</Text>
-                <TouchableOpacity>
-                  <Text style={styles.chipButton}>&times;</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>Seafood Allergic</Text>
-                <TouchableOpacity>
-                  <Text style={styles.chipButton}>&times;</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={styles.chips}><Text style={styles.chipText}>Edit</Text>
-                <TouchableOpacity>
-                  <Text style={styles.chipButton}>&times;</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+              {preferenceInfo}
           </View>
+            <Button  onPress={() => this.onPressedSubmit()
+            }        title=" Edit"
+                     color={'white'}
+            >
+            </Button>
         </View>
       </ImageBackground>
     );
@@ -193,6 +186,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginBottom: 10,
   },
-
+    submit:{
+        borderColor:'white',
+        borderWidth: 1,
+        color:'white',
+    },
 
 });
