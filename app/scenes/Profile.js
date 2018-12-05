@@ -43,6 +43,9 @@ export default class Profile extends Component<Props> {
         for (let index = 0; index < field.length; index++) {
           tempArray.push(field[index]);
         }
+        this.setState({
+          preference: tempArray
+        })
       } else {
         // doc.data() will be undefined in this case
       }
