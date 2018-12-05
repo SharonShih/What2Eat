@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { YelpAuth } from '../../services/YelpFusion';
-import {Alert, ImageBackground,Image} from "react-native";
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {Alert, ImageBackground,Image, StyleSheet, Text, View, Button, Linking} from "react-native";
 import {Header, Icon, Left} from "native-base";
+import openMap from 'react-native-open-maps';
 
 export default class YelpSearchRequest extends Component<Props> {
     static navigationOptions={
@@ -15,9 +15,8 @@ export default class YelpSearchRequest extends Component<Props> {
         super(props);
         this.state = {
             isLoading: true,
-            dataSource: [],
+            dataSource: null,
             searchInfo: this.props.navigation.getParam('searchInfo', '')
-
         }
     }
 
@@ -30,6 +29,7 @@ export default class YelpSearchRequest extends Component<Props> {
         })
             .then ( (response) => response.json() )
             .then( (responseJson) => {
+              //TODO: Avoid the situation when the businesses is closed
               var min=0;
               var max= responseJson.businesses.length;
               var random =Math.floor(Math.random() * (+max - +min)) + +min;
@@ -38,7 +38,6 @@ export default class YelpSearchRequest extends Component<Props> {
                 this.setState({
                     isLoading: false,
                     dataSource: responseJson.businesses[random],
-                    randomNum: random,
                 })
             })
             .catch((error) => {
@@ -54,6 +53,8 @@ export default class YelpSearchRequest extends Component<Props> {
         } else {
             let name = this.state.dataSource.name;
             let image_url = this.state.dataSource.image_url;
+            let url = this.state.dataSource.url;
+            let coordinates = this.state.dataSource.coordinates;
             return (
                 <ImageBackground source={require('../components/Stellar.png')}
                                  style={styles.Background}>
@@ -64,6 +65,8 @@ export default class YelpSearchRequest extends Component<Props> {
                     </Header>
                 <View style={styles.container}>
                     <Text>{name}</Text>
+                  <Button title = {"OPEN YELP"} onPress={() => Linking.openURL( url )}/>
+                  <Button title = {"OPEN MAP"} onPress={() => openMap( coordinates )}/>
                   <Image source={{uri: image_url}}
                          style={{width: 80, height: 80, justifyContent: 'flex-start'}} />
                 </View>
