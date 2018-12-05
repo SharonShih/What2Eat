@@ -16,8 +16,8 @@ export default class YelpSearchRequest extends Component<Props> {
         this.state = {
             isLoading: true,
             dataSource: [],
-            url1:'',
             searchInfo: this.props.navigation.getParam('searchInfo', '')
+
         }
     }
 
@@ -30,9 +30,15 @@ export default class YelpSearchRequest extends Component<Props> {
         })
             .then ( (response) => response.json() )
             .then( (responseJson) => {
+              var min=0;
+              var max= responseJson.businesses.length;
+              var random =Math.floor(Math.random() * (+max - +min)) + +min;
+              console.log(responseJson.businesses.length);
+              console.log("random:" + String(random));
                 this.setState({
                     isLoading: false,
-                    dataSource: responseJson.businesses,
+                    dataSource: responseJson.businesses[random],
+                    randomNum: random,
                 })
             })
             .catch((error) => {
@@ -40,22 +46,14 @@ export default class YelpSearchRequest extends Component<Props> {
             });
     }
     render() {
-        let name  =[];
-        let image_url=[];
-        let url1;
         if (this.state.isLoading) {
             return (
                 <View style={styles.container}>
                 </View>
             )
         } else {
-             name = this.state.dataSource.map((val, key) => {
-               return <View key={key} style={styles.item}><Text>{val.name}</Text></View>
-            });
-            image_url = this.state.dataSource.map((val, key) => {
-                return <View key={key} style={styles.item}><Text>{val.image_url}</Text></View>
-            });
-
+            let name = this.state.dataSource.name;
+            let image_url = this.state.dataSource.image_url;
             return (
                 <ImageBackground source={require('../components/Stellar.png')}
                                  style={styles.Background}>
@@ -65,9 +63,9 @@ export default class YelpSearchRequest extends Component<Props> {
                         </Left>
                     </Header>
                 <View style={styles.container}>
-                    {name[0]}
-                    {image_url[0]}
-                    <Text>{typeof image_url[0]}</Text>
+                    <Text>{name}</Text>
+                  <Image source={{uri: image_url}}
+                         style={{width: 80, height: 80, justifyContent: 'flex-start'}} />
                 </View>
                 </ImageBackground>
             );
