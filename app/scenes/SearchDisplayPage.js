@@ -1,11 +1,23 @@
 import React, {Component} from 'react';
 import {YelpAuth} from '../../services/YelpFusion';
-import {Alert, ImageBackground, Image, StyleSheet, Text, View, Button, Linking} from "react-native";
+import {Alert, ImageBackground, Image, StyleSheet, Text, View, Button, Linking, TouchableHighlight} from "react-native";
 import {Header, Icon, Left} from "native-base";
-import openMap, {createOpenLink} from 'react-native-open-maps';
 
 export default class YelpSearchRequest extends Component<Props> {
   static navigationOptions = {
+    title: 'Result',
+    headerStyle: {
+      backgroundColor: '#7174BF',
+      marginTop: 15,
+      borderBottomWidth: 0,
+      opacity:0.7,
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontSize:20,
+      textAlign: 'left',
+
+    },
     drawerIcon: ({tintColor}) => (
       <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
     )
@@ -54,24 +66,6 @@ export default class YelpSearchRequest extends Component<Props> {
 
   }
 
-  // goPlace(coordinates) {
-  //   return (
-  //     <Popup
-  //       isVisible={this.state.isVisible}
-  //       onCancelPressed={() => this.setState({isVisible: false})}
-  //       onAppPressed={() => this.setState({isVisible: false})}
-  //       onBackButtonPressed={() => this.setState({isVisible: false})}
-  //       modalProps={{ // you can put all react-native-modal props inside.
-  //         animationIn: 'slideInUp'
-  //       }}
-  //       appsWhiteList={['apple-maps', 'google-maps']}
-  //       options={{/* See `showLocation` method above, this accepts the same options. */}}
-  //       style={{/* Optional: you can override default style by passing your values. */}}
-  //     />
-  //   )
-  // }
-
-
 render()
 {
   if (this.state.isLoading) {
@@ -82,7 +76,15 @@ render()
   } else {
     let name = this.state.dataSource[this.state.randomNum].name;
     let image_url = this.state.dataSource[this.state.randomNum].image_url;
-    let url = this.state.dataSource[this.state.randomNum].url;
+    let categoriesRef = this.state.dataSource[this.state.randomNum].categories;
+    let categories = [];
+    for (let i = 0; i< categoriesRef.length ; i ++) {
+      categories.push(categoriesRef[i].title);
+    }
+    let location = this.state.dataSource[this.state.randomNum].location.display_address;
+    let rating = this.state.dataSource[this.state.randomNum].rating;
+    let display_phone = this.state.dataSource[this.state.randomNum].display_phone;
+    console.log(categories);
     let coordinates = this.state.dataSource[this.state.randomNum].coordinates.latitude + "+" + this.state.dataSource[this.state.randomNum].coordinates.longitude;
     //TODO: GOOGLE MAP
     // let google = "google.navigation:q=" + coordinates;
@@ -90,42 +92,116 @@ render()
     return (
       <ImageBackground source={require('../components/Stellar.png')}
                        style={styles.Background}>
-        <Header>
-          <Left>
-            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
-          </Left>
-        </Header>
-        <View style={styles.container}>
-          <Text>{name}</Text>
-          <Button title={"OPEN YELP"} onPress={() => Linking.openURL(url)}/>
-          <Button title={"AppleMap"} onPress={() => Linking.openURL(apple)}/>
-          <Image source={{uri: image_url}}
-                 style={{width: 80, height: 80, justifyContent: 'flex-start'}}/>
-          <Button title={"NEXT"} onPress={() => this.randomChoice()}/>
+        <Text style = {styles.Text}>What To Eat Today{"\n"}&#8595; &#8595; &#8595; &#8595;</Text>
+        <Image source={{uri: image_url}}
+               style={styles.image}/>
+          <View style = {styles.shadowOffset}>
+            <Text style = {styles.textName}>{name}</Text>
+            <Text style = {styles.textInfo}>{categories.toString()}</Text>
+            <Text style = {styles.textInfo}>&#10147; {location}</Text>
+            <Text style = {styles.textInfo}>&#9733; {rating}/5 Stars </Text>
+            <Text style = {styles.textInfo}>&#9990; {display_phone} </Text>
+          </View>
+
+        <View style = {{flexDirection: 'row', flexWrap: 'wrap'}}>
+          <TouchableHighlight
+            style ={styles.goButton}>
+            <Button
+              title="Let's Go!"
+              color="#000099"
+              onPress={() => Linking.openURL(apple)} />
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style ={styles.nextButton}>
+            <Button
+              title="Next&#8594;"
+              color="#000"
+              onPress={() => this.randomChoice()} />
+          </TouchableHighlight>
         </View>
       </ImageBackground>
     );
   }
 }
 }
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  item: {
-    flex: 1,
-    alignSelf: 'stretch',
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee'
-  },
-  Background: {
+
+  Background:{
     width: '100%',
     height: '100%',
+  },
+  Text:{
+    fontSize: 30,
+    fontFamily: 'Georgia',
+    color: '#FFF',
+    textAlign: 'center',
+    position: 'absolute',
+    paddingTop: 100,
+    paddingLeft: 60,
+
+  },
+
+  image: {
+    width:  '100%',
+    height: 200,
+    marginTop: 180,
+
+  },
+  textName: {
+    color: "#000",
+    fontSize: 25,
+    paddingLeft: 15,
+    //paddingBottom: 3,
+    paddingTop: 6,
+  },
+  textInfo: {
+    color: "#000",
+    fontSize: 15,
+    paddingLeft: 15,
+    paddingTop: 5,
+  },
+  shadowOffset: {
+    //borderWidth: 1,
+    backgroundColor: '#FFF',
+    height: 150,
+    width: '100%',
+    borderBottomColor: 'gray',
+    borderTopColor: 'gray',
+    borderBottomWidth: 1,
+    borderTopWidth:1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+
+    //borderRadius: 5,
+    //borderColor: 'gray',
+    //shadowColor: 'gray',
+    //shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.8,
+    //shadowRadius: 2,
+    //elevation: 1,
+    //marginLeft: 5,
+    //marginRight: 5,
+    marginTop: 0,
+  },
+  goButton:{
+    height: 45,
+    width: 180,
+    borderRadius: 20,
+    backgroundColor: "white",
+    marginLeft: 40,
+    marginBottom: 10,
+    marginTop: 40,
+  },
+  nextButton:{
+    height: 45,
+    width: 100,
+    borderRadius: 20,
+    backgroundColor: "white",
+    opacity: 0.7,
+    marginLeft: 20,
+    marginBottom: 10,
+    marginTop: 40,
   },
 });
