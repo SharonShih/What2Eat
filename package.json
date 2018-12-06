@@ -11,7 +11,7 @@
     "firebase-admin": "^6.1.0",
     "native-base": "^2.8.1",
     "react": "16.4.1",
-    "react-native": "^0.56.0",
+    "react-native": "^0.57.7",
     "react-native-cli": "^2.0.1",
     "react-native-open-maps": "^0.3.2",
     "react-native-router-flux": "^3.35.0",
@@ -21,7 +21,8 @@
     "babel-jest": "23.4.2",
     "babel-preset-react-native": "5.0.2",
     "jest": "23.5.0",
-    "react-test-renderer": "16.4.1"
+    "react-test-renderer": "16.4.1",
+    "schedule": "^0.4.0"
   },
   "jest": {
     "preset": "react-native"
