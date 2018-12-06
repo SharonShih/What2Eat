@@ -13,6 +13,7 @@
     "react": "16.4.1",
     "react-native": "^0.57.7",
     "react-native-cli": "^2.0.1",
+    "react-native-map-link": "^2.1.4",
     "react-native-open-maps": "^0.3.2",
     "react-native-router-flux": "^3.35.0",
     "react-navigation": "^2.6.2"
