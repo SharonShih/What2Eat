@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,} from 'react-native';
+import {Platform, StyleSheet, Text, View,Image} from 'react-native';
+import { Spinner } from 'native-base';
 import Firebase from "./services/Firebase.js";
 import { AppDrawerNavigator } from './app/components/RootNavigator';
 import AuthStackNavigator from './app/components/AuthStackNavigator';

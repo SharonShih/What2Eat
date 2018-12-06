@@ -11,7 +11,7 @@
     "firebase-admin": "^6.1.0",
     "native-base": "^2.8.1",
     "react": "16.4.1",
-    "react-native": "^0.57.7",
+    "react-native": "^0.56.0",
     "react-native-cli": "^2.0.1",
     "react-native-map-link": "^2.1.4",
     "react-native-open-maps": "^0.3.2",
