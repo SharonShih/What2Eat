@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {YelpAuth} from '../../services/YelpFusion';
-import {Alert, ImageBackground, Image, StyleSheet, Text, View, Button, Linking, TouchableHighlight} from "react-native";
-import {Header, Icon, Left} from "native-base";
+import {ImageBackground, Image, StyleSheet, Text, View, Button, Linking, TouchableHighlight} from "react-native";
+import {Icon} from "native-base";
 import Firebase from '../../services/Firebase';
 
 export default class YelpSearchRequest extends Component<Props> {
@@ -22,7 +22,7 @@ export default class YelpSearchRequest extends Component<Props> {
     drawerIcon: ({tintColor}) => (
       <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
     )
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ export default class YelpSearchRequest extends Component<Props> {
       searchInfo: this.props.navigation.getParam('searchInfo', ''),
       randomNum: 0,
     }
-  }
+  };
 
   componentDidMount() {
     return fetch(this.state.searchInfo, {
@@ -47,7 +47,7 @@ export default class YelpSearchRequest extends Component<Props> {
         this.setState({
           isLoading: false,
           dataSource: responseJson.businesses,
-        })
+        });
         this.randomChoice();
       })
       .catch((error) => {
@@ -97,10 +97,11 @@ export default class YelpSearchRequest extends Component<Props> {
       }
     }.bind(this)).catch(function (error) {
       console.log("Error getting document:", error);
-    })
+    });
     this.props.navigation.goBack();
     Linking.openURL(url);
   }
+
   render() {
     if (this.state.isLoading) {
       return (
