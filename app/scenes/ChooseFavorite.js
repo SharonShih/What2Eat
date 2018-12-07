@@ -21,6 +21,9 @@ export default class ChooseFavorite extends Component<Props> {
       click7:0,
       click8:0,
       click9:0,
+        click10:0,
+        click11:0,
+        click12:0,
     }
   }
 
@@ -73,6 +76,21 @@ export default class ChooseFavorite extends Component<Props> {
       click9: this.state.click9+1,
     });
   }
+    handlerButtonOnClick10(){
+        this.setState({
+            click10: this.state.click10+1,
+        });
+    }
+    handlerButtonOnClick11(){
+        this.setState({
+            click11: this.state.click11+1,
+        });
+    }
+    handlerButtonOnClick9(){
+        this.setState({
+            click12: this.state.click12+1,
+        });
+    }
 
 
   AddItemsToArray = (food) => {
@@ -88,7 +106,7 @@ export default class ChooseFavorite extends Component<Props> {
     db.settings({
       timestampsInSnapshots: true
     });
-    //TODO: reset database
+
     db.collection("users").doc(uid).update(
       {
         preference: this.state.ArrayOfFood,
@@ -131,6 +149,15 @@ export default class ChooseFavorite extends Component<Props> {
     const Desert = {
       uri: 'https://www.askchefdennis.com/wp-content/uploads/2014/10/Fettuccine-Alfredo-2.jpg'
     }
+      const Vietnamese = {
+          uri: 'https://livingnomads.com/wp-content/uploads/2017/06/13/prawn-rice-paper-rolls-vietnamese-cuisine.jpg'
+      }
+      const Steak = {
+          uri: 'https://buffalorunranch.com/wp-content/uploads/2017/08/ribeye-1.jpg'
+      }
+      const Cafe = {
+          uri: 'https://media-cdn.tripadvisor.com/media/photo-s/0c/0e/61/91/cafe-amore.jpg'
+      }
     var _style1;
     if (this.state.click1%2==0){ // clicked button style
       _style1 = {
@@ -230,6 +257,39 @@ export default class ChooseFavorite extends Component<Props> {
         opacity: 0.2
       }
     }
+      var _style10;
+      if (this.state.click10%2==0){ // clicked button style
+          _style10 = {
+              opacity: 1
+          }
+      }
+      else{ // default button style
+          _style10 = {
+              opacity: 0.2
+          }
+      }
+      var _style11;
+      if (this.state.click11%2==0){ // clicked button style
+          _style11 = {
+              opacity: 1
+          }
+      }
+      else{ // default button style
+          _style11 = {
+              opacity: 0.2
+          }
+      }
+      var _style12;
+      if (this.state.click1%2==0){ // clicked button style
+          _style12 = {
+              opacity: 1
+          }
+      }
+      else{ // default button style
+          _style12 = {
+              opacity: 0.2
+          }
+      }
     return (
       <ImageBackground
         source={require('../components/Stellar.png')}
@@ -237,6 +297,7 @@ export default class ChooseFavorite extends Component<Props> {
         <ScrollView>
         <FavorText FavorText ={'Please Choose Your Favorite Type of Cuisines'}></FavorText>
         <View style={styles.imageLayout}>
+
           <View style={_style1}><FoodPicture FoodPicture={JapaneseImag} onPress={() => {this.handlerButtonOnClick1();this.AddItemsToArray('Japanese');}}/></View>
           <View style={_style2}><FoodPicture FoodPicture={MexicanImag} onPress={() => {this.handlerButtonOnClick2();this.AddItemsToArray('Mexican');}}/></View>
           <View style={_style3}><FoodPicture FoodPicture={AmricanImag} onPress={() => {this.handlerButtonOnClick3();this.AddItemsToArray('Amrican');}}/></View>
@@ -246,6 +307,9 @@ export default class ChooseFavorite extends Component<Props> {
           <View style={_style7}><FoodPicture FoodPicture={ItalianFood} onPress={() => {this.handlerButtonOnClick7();this.AddItemsToArray('ItalianFood');}}/></View>
           <View style={_style8}><FoodPicture FoodPicture={KoreanImag} onPress={() => {this.handlerButtonOnClick8();this.AddItemsToArray('KoreanImag');}}/></View>
           <View style={_style9}><FoodPicture FoodPicture={Desert} onPress={() => {this.handlerButtonOnClick9();this.AddItemsToArray('Desert');}}/></View>
+            <View style={_style10}><FoodPicture FoodPicture={Vietnamese} onPress={() => {this.handlerButtonOnClick10();this.AddItemsToArray('Vietnamese');}}/></View>
+            <View style={_style11}><FoodPicture FoodPicture={Steak} onPress={() => {this.handlerButtonOnClick11();this.AddItemsToArray('Steak');}}/></View>
+            <View style={_style12}><FoodPicture FoodPicture={Cafe} onPress={() => {this.handlerButtonOnClick12();this.AddItemsToArray('Cafe');}}/></View>
         </View>
 
         <TouchableHighlight
