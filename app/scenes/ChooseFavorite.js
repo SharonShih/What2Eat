@@ -11,7 +11,16 @@ export default class ChooseFavorite extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      ArrayOfFood: []
+      ArrayOfFood: [],
+      click1:0,
+      click2:0,
+      click3:0,
+      click4:0,
+      click5:0,
+      click6:0,
+      click7:0,
+      click8:0,
+      click9:0,
     }
   }
 
@@ -19,8 +28,58 @@ export default class ChooseFavorite extends Component<Props> {
     header: null
   }
 
+  handlerButtonOnClick1(){
+    this.setState({
+      click1: this.state.click1+1,
+    });
+  }
+  handlerButtonOnClick2(){
+    this.setState({
+      click2: this.state.click2+1,
+    });
+  }
+  handlerButtonOnClick3(){
+    this.setState({
+      click3: this.state.click3+1,
+    });
+  }
+  handlerButtonOnClick4(){
+    this.setState({
+      click4: this.state.click4+1,
+    });
+  }
+  handlerButtonOnClick5(){
+    this.setState({
+      click5: this.state.click5+1,
+    });
+  }
+  handlerButtonOnClick6(){
+    this.setState({
+      click6: this.state.click6+1,
+    });
+  }
+  handlerButtonOnClick7(){
+    this.setState({
+      click7: this.state.click7+1,
+    });
+  }
+  handlerButtonOnClick8(){
+    this.setState({
+      click8: this.state.click8+1,
+    });
+  }
+  handlerButtonOnClick9(){
+    this.setState({
+      click9: this.state.click9+1,
+    });
+  }
+
+
   AddItemsToArray = (food) => {
-    this.state.ArrayOfFood.push(food);
+    if(!this.state.ArrayOfFood.includes(food))
+    {
+      this.state.ArrayOfFood.push(food);
+    }
   }
 
   onPressedSubmit = () => {
@@ -54,7 +113,7 @@ export default class ChooseFavorite extends Component<Props> {
       uri: 'https://marvel-live.freetls.fastly.net/canvas/2018/10/4415bb555f0f407a851d3c6faaddae15?quality=95&fake=.png'
     }
     const AmricanImag = {
-      uri: 'https://marvel-live.freetls.fastly.net/canvas/2018/10/3eec8684f65c4e9b910c84d2191b9fcc?quality=95&fake=.png'
+      uri: 'https://s3-us-west-2.amazonaws.com/ncs-ons10-us-west-2-159685838580-content-prd/ns1or_wt1_p/s3fs-public/styles/cf_medium_teaser_320x180/public/Image_cont_c925eca7fba207d470efc1999e422dee6440c41d.jpeg'
     }
     const KoreanImag = {
       uri: 'https://i.kinja-img.com/gawker-media/image/upload/s--djYdkXK4--/c_scale,f_auto,fl_progressive,q_80,w_1600/be9vyovcn2gqwod7kd16.jpg'
@@ -74,27 +133,126 @@ export default class ChooseFavorite extends Component<Props> {
     const Desert = {
       uri: 'https://www.askchefdennis.com/wp-content/uploads/2014/10/Fettuccine-Alfredo-2.jpg'
     }
+    var _style1;
+    if (this.state.click1%2==0){ // clicked button style
+      _style1 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style1 = {
+        opacity: 0.2
+      }
+    }
+    var _style2;
+    if (this.state.click2%2==0){ // clicked button style
+      _style2 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style2 = {
+        opacity: 0.2
+      }
+    }
+    var _style3;
+    if (this.state.click3%2==0){ // clicked button style
+      _style3 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style3 = {
+        opacity: 0.2
+      }
+    }
+    var _style4;
+    if (this.state.click4%2==0){ // clicked button style
+      _style4 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style4 = {
+        opacity: 0.2
+      }
+    }
+    var _style5;
+    if (this.state.click5%2==0){ // clicked button style
+      _style5 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style5 = {
+        opacity: 0.2
+      }
+    }
+    var _style6;
+    if (this.state.click6%2==0){ // clicked button style
+      _style6 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style6 = {
+        opacity: 0.2
+      }
+    }
+    var _style7;
+    if (this.state.click7%2==0){ // clicked button style
+      _style7 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style7 = {
+        opacity: 0.2
+      }
+    }
+    var _style8;
+    if (this.state.click8%2==0){ // clicked button style
+      _style8 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style8 = {
+        opacity: 0.2
+      }
+    }
+    var _style9;
+    if (this.state.click9%2==0){ // clicked button style
+      _style9 = {
+        opacity: 1
+      }
+    }
+    else{ // default button style
+      _style9 = {
+        opacity: 0.2
+      }
+    }
     return (
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-          <FavorText FavorText={' Choose three Food You like '}/>
-          <View style={styles.imageLayout}>
-            <FoodPicture FoodPicture={JapaneseImag} onPress={() => this.AddItemsToArray('Japanese')}/>
-            <FoodPicture FoodPicture={MexicanImag} onPress={() => this.AddItemsToArray('Mexican')}/>
-            <FoodPicture FoodPicture={AmricanImag} onPress={() => this.AddItemsToArray('Amrican')}/>
-            <FoodPicture FoodPicture={KoreanImag} onPress={() => this.AddItemsToArray('Korean')}/>
-            <FoodPicture FoodPicture={FastFood} onPress={() => this.AddItemsToArray('FastFood')}/>
-            <FoodPicture FoodPicture={SeaFood} onPress={() => this.AddItemsToArray('SeaFood')}/>
-            <FoodPicture FoodPicture={ChineseFood} onPress={() => this.AddItemsToArray('ChineseFood')}/>
-            <FoodPicture FoodPicture={ItalianFood} onPress={() => this.AddItemsToArray('ItalianFood')}/>
-            <FoodPicture FoodPicture={Desert} onPress={() => this.AddItemsToArray('Desert')}/>
-          </View>
-          <View style={styles.submit}>
-            <Button onPress={() => this.onPressedSubmit()}
-                    title="Sumbit"
-                    color={'white'}/>
-          </View>
+        <FavorText FavorText={' Choose three Food You like '}/>
+        <View style={styles.imageLayout}>
+          <View style={_style1}><FoodPicture FoodPicture={JapaneseImag} onPress={() => {this.handlerButtonOnClick1();this.AddItemsToArray('Japanese');}}/></View>
+          <View style={_style2}><FoodPicture FoodPicture={MexicanImag} onPress={() => {this.handlerButtonOnClick2();this.AddItemsToArray('Mexican');}}/></View>
+          <View style={_style3}><FoodPicture FoodPicture={AmricanImag} onPress={() => {this.handlerButtonOnClick3();this.AddItemsToArray('Amrican');}}/></View>
+          <View style={_style4}><FoodPicture FoodPicture={FastFood} onPress={() => {this.handlerButtonOnClick4();this.AddItemsToArray('FastFood');}}/></View>
+          <View style={_style5}><FoodPicture FoodPicture={SeaFood} onPress={() => {this.handlerButtonOnClick5();this.AddItemsToArray('SeaFood');}}/></View>
+          <View style={_style6}><FoodPicture FoodPicture={ChineseFood} onPress={() => {this.handlerButtonOnClick6();this.AddItemsToArray('ChineseFood');}}/></View>
+          <View style={_style7}><FoodPicture FoodPicture={ItalianFood} onPress={() => {this.handlerButtonOnClick7();this.AddItemsToArray('ItalianFood');}}/></View>
+          <View style={_style8}><FoodPicture FoodPicture={KoreanImag} onPress={() => {this.handlerButtonOnClick8();this.AddItemsToArray('KoreanImag');}}/></View>
+          <View style={_style9}><FoodPicture FoodPicture={Desert} onPress={() => {this.handlerButtonOnClick9();this.AddItemsToArray('Desert');}}/></View>
+        </View>
+        <View style={styles.submit}>
+          <Button onPress={() => this.onPressedSubmit()}
+                  title="Sumbit"
+                  color={'white'}/>
+        </View>
       </ImageBackground>
     );
   }
