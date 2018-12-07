@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {createDrawerNavigator, createStackNavigator, DrawerItems,} from 'react-navigation';
 import 'firebase/firestore';
-import {Image,
-    View,
-    SafeAreaView,
-    ScrollView,
-    Dimensions} from "react-native";
+import {
+  Image,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions
+} from "react-native";
 import HistoryScreen from '../scenes/HistoryScreen';
 import Profile from '../scenes/Profile';
 import MainPage from '../scenes/MainPage';
@@ -15,44 +17,49 @@ import {Icon} from "native-base";
 import YelpSearchRequest from "./YelpSearchRequest";
 import Logout from '../scenes/Logout';
 
-const CustomDrawComponent=(props)=>(
-    <SafeAreaView style={{flex: 1}}>
-        <View style={{height:150, backgroundColor: 'white',alignItems:'center', justifyContent:'center'}}>
-            <Image source={require('./images.png')} style={{height:120,width:120, borderRadius: 60}}/>
-        </View>
-        <ScrollView>
-            <DrawerItems {...props}/>
-        </ScrollView>
-    </SafeAreaView>
+const CustomDrawComponent = (props) => (
+  <SafeAreaView style={{flex: 1, backgroundColor: '#7174BF'}}>
+    <View style={{height: 150, backgroundColor: '#7174BF', alignItems: 'center', justifyContent: 'center'}}>
+      <Image source={require('./w2e_logo.png')} style={{height: 130, width: 130, borderRadius: 0}}/>
+    </View>
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </SafeAreaView>
 )
 
-export const AppStackNavigator =  createStackNavigator({
+export const AppStackNavigator = createStackNavigator({
   MainPage: MainPage,
   SearchDisplayPage: SearchDisplayPage,
   ChooseFavorite: ChooseFavorite,
-  History: HistoryScreen,
   YelpSearchRequest: YelpSearchRequest
 }, {
   initialPage: 'MainPage',
   headerMode: 'none',
-  navigationOptions: { header: { visible: false } } // ADDED THIS
+  navigationOptions: {header: {visible: false}} // ADDED THIS
 });
 
-export const AppDrawerNavigator =createDrawerNavigator({
-    MainPage: {screen: AppStackNavigator,
-      navigationOptions: {
-        drawerIcon:({tintColor})=>(
-          <Icon name={'home'} style={{fontSize:24, color: tintColor}}/>
-        )
-      }},
-    Profile: Profile,
-    History: HistoryScreen,
-    Logout: Logout,
-},{
-    contentComponent: CustomDrawComponent,
-    contentOptions: {
-        activateTintColor:'orange'
+export const AppDrawerNavigator = createDrawerNavigator({
+  MainPage: {
+    screen: AppStackNavigator,
+    navigationOptions: {
+      drawerIcon: ({tintColor}) => (
+        <Icon name={'md-home'} style={{fontSize: 24, color: 'white'}}/>
+      )
     }
-});
+  },
+  Profile: Profile,
+  History: HistoryScreen,
+  Logout: Logout,
+}, {
+  contentComponent: CustomDrawComponent,
+  contentOptions: {
+    activeBackgroundColor: '#585d91',
 
+
+    labelStyle: {
+      color: 'white',
+    },
+  }
+});
 

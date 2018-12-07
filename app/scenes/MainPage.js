@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import 'firebase/firestore';
+import Firebase from '../../services/Firebase'
 
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Alert,} from "react-native";
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground, Alert, Animated, Easing} from "react-native";
 import ModalSelector from 'react-native-modal-selector'
 
-import {Header, Icon, Left, Right} from "native-base";
+import {Header, Icon, Left} from "native-base";
 
 type Props = {};
 export default class MainPage extends Component<Props> {
 
   static navigationOptions = {
     drawerIcon: ({tintColor}) => (
-      <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
+      <Icon name={'home'} style={{fontSize: 24, color: 'white'}}/>
     )
   }
 
@@ -26,29 +26,34 @@ export default class MainPage extends Component<Props> {
       }
     };
 
-    //TODO: check if acc first time log in
-    // var checkUidExist = () => {
-    //   let uid = Firebase.auth().currentUser.uid;
-    //   var db = Firebase.firestore(Firebase);
-    //   Alert.alert(uid);
-    //   db.settings({
-    //     timestampsInSnapshots: true
-    //   });
-    //   var docRef = db.collection("users").doc(uid);
-    //   docRef.get().then(function(doc) {
-    //     if (doc.exists) {
-    //       Alert.alert("yes");
-    //     } else {
-    //       Alert.alert("no");
-    //       this.props.navigation.navigate('SearchDisplayPage');
-    //     }
-    //   }).catch(function(error) {
-    //     console.log("Error getting document:", error);
-    //   });
-    // };
-    // checkUidExist();
+    var checkUidExist = () => {
+      let uid = Firebase.auth().currentUser.uid;
+      var db = Firebase.firestore(Firebase);
+      db.settings({
+        timestampsInSnapshots: true
+      });
+      var docRef = db.collection("users").doc(uid);
+      docRef.get().then(function(doc) {
+
+        var tempArray = [];
+        let field = doc.get('preference');
+        for (let index = 0; index < field.length; index++) {
+          tempArray.push(field[index]);
+        }
+        //Alert.alert(field.length);
+        if (field.length==0) {
+          this.props.navigation.navigate('ChooseFavorite');
+        }
+      }.bind(this)).catch(function(error) {
+      });
+    };
+    checkUidExist(this);
   }
 
+  componentWillMount() {
+    this.animatedValue = new Animated.Value(2);
+
+  }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = parseFloat(position.coords.latitude)
@@ -59,8 +64,17 @@ export default class MainPage extends Component<Props> {
       };
       this.setState({initialPosition: initialRegion})
     }, (error) => {
-      console.log(error.message);
+      Alert.alert(error.message);
     })
+
+
+    Animated.loop(
+      Animated.timing(this.animatedValue, {
+        toValue: 0.3,
+        duration: 5000,
+        easing: Easing.bounce
+      })
+    ).start()
   }
 
   onPressSearchTarget() {
@@ -71,6 +85,11 @@ export default class MainPage extends Component<Props> {
   }
 
   render() {
+
+    const animatedStyle = {
+      opacity: this.animatedValue
+    };
+
     let index = 0;
     const data = [
       { key: index++, section: true, label: 'Range' },
@@ -82,12 +101,15 @@ export default class MainPage extends Component<Props> {
     return (
       <ImageBackground source={require('../components/Stellar.png')}
                        style={styles.Background}>
-        <Header>
+        <Header style={{backgroundColor: "#7174BF"}}>
           <Left>
-            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
+            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
+          <Text style={styles.headerTitle}>What2Eat</Text>
+
         </Header>
-        <View style={{flex:1, justifyContent:'space-around', padding:50}}>
+        <Text style={styles.greeting}>{new Date().toDateString()}</Text>
+        <View style={styles.Button2}>
           <ModalSelector
             data={data}
             initValue={this.state.radius.toString()}
@@ -109,10 +131,12 @@ export default class MainPage extends Component<Props> {
         </View>
         <View>
           <Text style={styles.circleText}>What to{"\n"}Eat Today?</Text>
-          <View style={styles.outerCircle}>
-            <TouchableOpacity onPress={this.onPressSearchTarget.bind(this)}><View style={styles.circle}>
-            </View></TouchableOpacity>
-          </View>
+          <Animated.View style={[styles.outerCircle, animatedStyle]}>
+            <TouchableOpacity onPress ={this.onPressSearchTarget.bind(this)}>
+              <View style={styles.circle}></View>
+            </TouchableOpacity>
+            <Animated.View style={[styles.circle2, animatedStyle]}/>
+          </Animated.View>
         </View>
       </ImageBackground>
 
@@ -125,35 +149,70 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  headerTitle:{
+
+    color: 'white',
+    fontSize: 15,
+    justifyContent: 'center',
+    paddingTop: 20,
+    alignSelf: 'center',
+    position: 'absolute',
+    flexDirection: 'row',
+  },
+  greeting:{
+
+    fontSize: 24,
+    color: 'white',
+    marginTop: 20,
+    textAlign:'left',
+    paddingLeft: 30,
+
+  },
+
+
   outerCircle: {
-    borderRadius: 100,
+    borderRadius: 200,
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: '#FFF',
-    opacity: 0.45,
-    width: 210,
-    height: 210,
-    marginTop: 260,
-    marginBottom: 20,
+    opacity: 0.4,
+    width: 280,
+    height: 280,
+    //marginTop: 60,
+    //marginBottom: 20,
     alignSelf: 'center',
+    justifyContent: 'center',
   },
   circle: {
     backgroundColor: "white",
-    opacity: 0.45,
-    borderRadius: 100,
-    width: 180,
-    height: 180,
-    margin: 15,
-    alignSelf: 'center',
+    opacity: 0.5,
+    borderRadius: 120,
+    width: 240,
+    height: 240,
+    margin: 20,
+    //alignSelf: 'center',
   },
   circleText: {
     fontSize: 30,
     color: '#FFF',
     textAlign: 'center',
     position: 'absolute',
-    paddingTop: 325,
+    paddingTop: 90,
     paddingLeft: 120,
 
   },
+  Button2:{
+    height: 45,
+    width: 280,
+    borderRadius: 10,
+    //backgroundColor: "white",
+    color: 'white',
+    marginLeft: 20,
+    marginBottom: 10,
+    marginTop: 5,
+    justifyContent:'space-around',
+    padding: 3,
+    alignSelf: 'center',
 
+  },
 });

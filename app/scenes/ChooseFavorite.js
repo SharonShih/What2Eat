@@ -3,7 +3,7 @@ import FavorText from '../components/FavorityText';
 import FoodPicture from '../components/FoodPicture';
 import Firebase from '../../services/Firebase';
 import 'firebase/firestore';
-import {StyleSheet, View, Button, ImageBackground} from "react-native";
+import {StyleSheet, View, Button, ImageBackground, TouchableHighlight,ScrollView} from "react-native";
 
 type Props = {};
 export default class ChooseFavorite extends Component<Props> {
@@ -88,11 +88,10 @@ export default class ChooseFavorite extends Component<Props> {
     db.settings({
       timestampsInSnapshots: true
     });
-    db.collection("users").doc(uid).set(
+    //TODO: reset database
+    db.collection("users").doc(uid).update(
       {
-        disliked_restaurant: [],
         preference: this.state.ArrayOfFood,
-        visited_restaurant: [],
       }
     ).then(function () {
       console.log("Document successfully written!");
@@ -101,8 +100,7 @@ export default class ChooseFavorite extends Component<Props> {
         console.error("Error writing document: ", error);
       });
     this.setState ({ArrayOfFood: []});
-    this.props.navigation.navigate('MainPage')
-
+    this.props.navigation.navigate('MainPage');
   }
 
   render() {
@@ -236,7 +234,8 @@ export default class ChooseFavorite extends Component<Props> {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <FavorText FavorText={' Choose three Food You like '}/>
+        <ScrollView>
+        <FavorText FavorText ={'Please Choose Your Favorite Type of Cuisines'}></FavorText>
         <View style={styles.imageLayout}>
           <View style={_style1}><FoodPicture FoodPicture={JapaneseImag} onPress={() => {this.handlerButtonOnClick1();this.AddItemsToArray('Japanese');}}/></View>
           <View style={_style2}><FoodPicture FoodPicture={MexicanImag} onPress={() => {this.handlerButtonOnClick2();this.AddItemsToArray('Mexican');}}/></View>
@@ -248,25 +247,35 @@ export default class ChooseFavorite extends Component<Props> {
           <View style={_style8}><FoodPicture FoodPicture={KoreanImag} onPress={() => {this.handlerButtonOnClick8();this.AddItemsToArray('KoreanImag');}}/></View>
           <View style={_style9}><FoodPicture FoodPicture={Desert} onPress={() => {this.handlerButtonOnClick9();this.AddItemsToArray('Desert');}}/></View>
         </View>
-        <View style={styles.submit}>
-          <Button onPress={() => this.onPressedSubmit()}
-                  title="Sumbit"
-                  color={'white'}/>
-        </View>
+
+        <TouchableHighlight
+          style ={styles.submit}>
+          <Button
+            title="Submit"
+            color="#5A6978"
+            onPress={() => this.onPressedSubmit()} />
+        </TouchableHighlight>
+        </ScrollView>
       </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
+
   Background: {
     width: '100%',
     height: '100%',
   },
-  submit: {
-    borderColor: 'white',
-    borderWidth: 1,
-    color: 'white',
+  submit:{
+    height: 45,
+    width: 250,
+    borderRadius: 10,
+    backgroundColor: "white",
+    marginLeft: 30,
+    marginBottom: 10,
+    marginTop: 20,
+    alignSelf: 'center',
   },
   imageLayout: {
     flexDirection: 'row',

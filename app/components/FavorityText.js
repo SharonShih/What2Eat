@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
     text:{
         flexDirection: 'row',
         color:'white',
-        fontWeight: 'bold',
+
         fontSize:28,
-        paddingTop: 70,
-        paddingBottom: 30,
+        paddingTop: 40,
+      paddingLeft: 20,
+      paddingRight: 30,
+        paddingBottom: 10,
     },
 })
 //make component to other part of app

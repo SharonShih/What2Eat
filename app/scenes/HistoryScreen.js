@@ -13,7 +13,7 @@ import Firebase from "../../services/Firebase";
 export default class HistoryScreen extends Component {
   static navigationOptions = {
     drawerIcon: ({tintColor}) => (
-      <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
+      <Icon name={'ios-time'} style={{fontSize: 24, color: 'white'}}/>
     )
   }
 
@@ -67,13 +67,13 @@ export default class HistoryScreen extends Component {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <Header>
+        <Header style={{backgroundColor: "#7174BF"}}>
           <Left>
-            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
+            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
+          <Text style={styles.headerTitle}>History</Text>
         </Header>
         <ScrollView>
-          <Text style = {styles.header}>History</Text>
           <View style = {styles.ProfileForm}>
             {visited_restaurantInfo}
           </View>
@@ -95,13 +95,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  header: {
-    fontSize: 25,
-    color: "#FFF",
-    fontWeight: 'bold',
-    textAlign:'center',
-    marginBottom: 0,
-    marginTop:60,
+  headerTitle:{
+    color: 'white',
+    fontSize: 15,
+    justifyContent: 'center',
+    paddingTop: 20,
+    alignSelf: 'center',
+    position: 'absolute',
+    flexDirection: 'row',
   },
   infoBox:{
 

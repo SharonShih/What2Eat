@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
     imageOffood:{
         width: 111,
         height: 150,
-        borderColor:'black',
-        borderWidth: 2,
+        borderColor:'white',
+        borderWidth: 0,
+      borderRadius: 10,
         marginBottom: 10,
         marginLeft: 10,
     },

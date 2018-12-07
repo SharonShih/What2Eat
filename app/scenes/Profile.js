@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ImageBackground, Alert, Button, ScrollView,
+  ImageBackground, Alert, Button, ScrollView, TouchableHighlight, Image,
 } from "react-native";
 import Firebase from "../../services/Firebase";
 
@@ -23,7 +23,7 @@ export default class Profile extends Component<Props> {
 
   static navigationOptions = {
     drawerIcon: ({tintColor}) => (
-      <Icon name={'home'} style={{fontSize: 24, color: tintColor}}/>
+      <Icon name={'md-person'} style={{fontSize: 24, color: 'white'}}/>
     )
   }
   onPressedSubmit = () => {
@@ -59,10 +59,8 @@ export default class Profile extends Component<Props> {
     for (let i = 0; i < this.state.preference.length; i++) {
       preferenceInfo.push(
         <View key={i} style={{flexDirection: 'row'}}>
-          <View style={styles.chips}><Text style={styles.chipText}>{this.state.preference[i]}</Text>
-            <TouchableOpacity>
-              <Text style={styles.chipButton}>&times;</Text>
-            </TouchableOpacity>
+          <View style={styles.chips}>
+            <Text style={styles.chipText}>{this.state.preference[i]}</Text>
           </View>
         </View>
       )
@@ -71,15 +69,17 @@ export default class Profile extends Component<Props> {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <Header>
+        <Header style={{backgroundColor: "#7174BF"}}>
           <Left>
-            <Icon name={'menu'} onPress={() => this.props.navigation.openDrawer()}/>
+            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
+          <Text style={styles.headerTitle}>Profile</Text>
         </Header>
+
         <ScrollView>
           <View style={styles.ProfileForm}>
-            <Text style={styles.header}>Your Profile </Text>
-            <View style={styles.avatar}></View>
+            <Image source={ require ('../components/w2e_logo.png')} style={styles.logo}></Image>
+
 
             <Text style={styles.infoTitle}>Account ID</Text>
             <View style={styles.infoBox}>
@@ -89,15 +89,21 @@ export default class Profile extends Component<Props> {
             <View style={styles.infoBox}>
               <Text style={styles.info}>{this.state.email}</Text>
             </View>
-            <Text style={styles.infoTitle}>Your Tags</Text>
+            <Text style={styles.infoTitle}>Preference</Text>
             <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
               {preferenceInfo}
             </View>
-            <Button onPress={() => this.onPressedSubmit()
-            } title=" Edit"
-                    color={'white'}
-            >
-            </Button>
+
+            <TouchableHighlight
+              style ={styles.Button2}>
+              <Button
+                title="Edit Preference"
+                color="#5A6978"
+                onPress={() => this.onPressedSubmit()} />
+
+            </TouchableHighlight>
+
+
           </View>
         </ScrollView>
       </ImageBackground>
@@ -117,22 +123,24 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  avatar: {
-    backgroundColor: "#FFF",
-    borderRadius: 100,
-    width: 115,
-    height: 115,
-    marginTop: 10,
-    marginBottom: 20,
-    alignSelf: 'center',
+  logo: {
+
+    width: 150,
+    height: 150,
+    paddingTop: 50,
+    paddingBottom: 30,
+
+    marginRight:90,
+    marginLeft:100,
   },
-  header: {
-    fontSize: 25,
-    color: "#FFF",
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 5,
-    marginTop: 5,
+  headerTitle:{
+    color: 'white',
+    fontSize: 15,
+    justifyContent: 'center',
+    paddingTop: 20,
+    alignSelf: 'center',
+    position: 'absolute',
+    flexDirection: 'row',
   },
   infoTitle: {
     fontSize: 20,
@@ -193,6 +201,15 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderWidth: 1,
     color: 'white',
+  },
+  Button2:{
+    height: 45,
+    width: 250,
+    borderRadius: 10,
+    backgroundColor: "white",
+    marginLeft: 30,
+    marginBottom: 10,
+    marginTop: 20,
   },
 
 });

@@ -127,14 +127,15 @@ export default class YelpSearchRequest extends Component<Props> {
         <ImageBackground source={require('../components/Stellar.png')}
                          style={styles.Background}>
           <Text style={styles.Text}>What To Eat Today{"\n"}&#8595; &#8595; &#8595; &#8595;</Text>
-          <Image source={{uri: image_url}}
-                 style={styles.image}/>
-          <View style={styles.shadowOffset}>
-            <Text style={styles.textName}>{name}</Text>
-            <Text style={styles.textInfo}>{categories.toString()}</Text>
-            <Text style={styles.textInfo}>&#10147; {location}</Text>
-            <Text style={styles.textInfo}>&#9733; {rating}/5 Stars </Text>
-            <Text style={styles.textInfo}>&#9990; {display_phone} </Text>
+          <View style = {styles.container}>
+            <Image source={{uri: image_url}} style={styles.image}/>
+            <View style = {styles.shadowOffset}>
+              <Text style = {styles.textName}>{name}</Text>
+              <Text style = {styles.textInfo}>{categories.toString()}</Text>
+              <Text style = {styles.textInfo}>&#10147; {location}</Text>
+              <Text style = {styles.textInfo}>&#9733; {rating}/5 Stars </Text>
+              <Text style = {styles.textInfo}>&#9990; {display_phone} </Text>
+            </View>
           </View>
 
           <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center',
     position: 'absolute',
-    paddingTop: 100,
+    paddingTop: 50,
     paddingLeft: 60,
 
   },
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    marginTop: 180,
+
 
   },
   textName: {
@@ -194,30 +195,14 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 15,
     paddingLeft: 15,
-    paddingTop: 5,
+    //paddingTop: 5,
   },
   shadowOffset: {
-    //borderWidth: 1,
     backgroundColor: '#FFF',
-    height: 150,
+    height: 160,
     width: '100%',
-    borderBottomColor: 'gray',
-    borderTopColor: 'gray',
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
+    borderWidth: 0,
 
-    //borderRadius: 5,
-    //borderColor: 'gray',
-    //shadowColor: 'gray',
-    //shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.8,
-    //shadowRadius: 2,
-    //elevation: 1,
-    //marginLeft: 5,
-    //marginRight: 5,
-    marginTop: 0,
   },
   goButton: {
     height: 45,
@@ -237,5 +222,21 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 10,
     marginTop: 40,
+  },
+  container:{
+    backgroundColor: '#FFF',
+    width: '90%',
+    borderBottomColor: 'gray',
+    borderTopColor: 'gray',
+    borderBottomWidth: 1,
+    borderTopWidth:1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderRadius: 10,
+    marginTop: 135,
+    padding: 5,
+    justifyContent: 'center',
+    alignSelf: 'center',
+
   },
 });
