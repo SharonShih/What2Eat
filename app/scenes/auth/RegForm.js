@@ -18,30 +18,31 @@ export default class RegForm extends Component<Props> {
   onPressSignUp() {
     if (this.state.password  != this.state.passwordConfirm) {
       Alert.alert("Password do not match")
-    }
-    Firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        let uid = Firebase.auth().currentUser.uid;
-        let db = Firebase.firestore(Firebase);
-        db.settings({
-          timestampsInSnapshots: true
-        });
-        //TODO: reset database
-        db.collection("users").doc(uid).set(
-          {
-            disliked_restaurant: [],
-            preference: [],
-            visited_restaurant: [],
-          }
-        ).then(function () {
-          console.log("Document successfully written!");
-        })
-          .catch(function (error) {
-            console.error("Error writing document: ", error);
+    } else {
+      Firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+          let uid = Firebase.auth().currentUser.uid;
+          let db = Firebase.firestore(Firebase);
+          db.settings({
+            timestampsInSnapshots: true
           });
-      }, (error) => {
-        Alert.alert(error.message)
-      });
+          //TODO: reset database
+          db.collection("users").doc(uid).set(
+            {
+              disliked_restaurant: [],
+              preference: [],
+              visited_restaurant: [],
+            }
+          ).then(function () {
+            console.log("Document successfully written!");
+          })
+            .catch(function (error) {
+              console.error("Error writing document: ", error);
+            });
+        }, (error) => {
+          Alert.alert(error.message)
+        });
+    }
   }
 
   render() {

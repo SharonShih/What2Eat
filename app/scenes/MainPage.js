@@ -19,7 +19,7 @@ export default class MainPage extends Component<Props> {
     super(props);
     this.state = {
       radius: 3219,
-      textInputValue: '',
+      textInputValue: "Range: 2 Miles",
       initialPosition: {
         latitude: 0,
         longitude: 0,
@@ -71,7 +71,7 @@ export default class MainPage extends Component<Props> {
     Animated.loop(
       Animated.timing(this.animatedValue, {
         toValue: 0.3,
-        duration: 5000,
+        duration: 4000,
         easing: Easing.bounce
       })
     ).start()
@@ -109,6 +109,7 @@ export default class MainPage extends Component<Props> {
 
         </Header>
         <Text style={styles.greeting}>{new Date().toDateString()}</Text>
+
         <View style={styles.Button2}>
           <ModalSelector
             data={data}
@@ -123,12 +124,14 @@ export default class MainPage extends Component<Props> {
                 textInputValue: option.label,
             })}}>
             <TextInput
-              style={{borderWidth:1, borderColor:'#ccc', padding:10, height:40}}
+              style={{borderWidth:1, borderColor:'#ccc', backgroundColor:'white',opacity: 0.85,padding:10, height:40, borderRadius: 10}}
               editable={false}
               placeholder="Range: 2 Miles"
-              value={this.state.textInputValue} />
+              value={this.state.textInputValue}> </TextInput>
           </ModalSelector>
         </View>
+
+
         <View>
           <Text style={styles.circleText}>What to{"\n"}Eat Today?</Text>
           <Animated.View style={[styles.outerCircle, animatedStyle]}>
@@ -161,11 +164,12 @@ const styles = StyleSheet.create({
   },
   greeting:{
 
-    fontSize: 24,
+    fontSize: 18,
     color: 'white',
     marginTop: 20,
     textAlign:'left',
-    paddingLeft: 30,
+    paddingLeft: 20,
+    paddingBottom: 20,
 
   },
 
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     width: 280,
     height: 280,
-    //marginTop: 60,
+    marginTop: 60,
     //marginBottom: 20,
     alignSelf: 'center',
     justifyContent: 'center',
@@ -197,7 +201,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center',
     position: 'absolute',
-    paddingTop: 90,
+    paddingTop: 155,
     paddingLeft: 120,
 
   },
@@ -207,11 +211,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     //backgroundColor: "white",
     color: 'white',
-    marginLeft: 20,
+    paddingHorizontal: 25,
     marginBottom: 10,
-    marginTop: 5,
+    marginTop: 10,
     justifyContent:'space-around',
-    padding: 3,
+
     alignSelf: 'center',
 
   },
