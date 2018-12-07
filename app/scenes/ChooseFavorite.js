@@ -86,7 +86,7 @@ export default class ChooseFavorite extends Component<Props> {
             click11: this.state.click11+1,
         });
     }
-    handlerButtonOnClick9(){
+    handlerButtonOnClick12(){
         this.setState({
             click12: this.state.click12+1,
         });
@@ -280,7 +280,7 @@ export default class ChooseFavorite extends Component<Props> {
           }
       }
       var _style12;
-      if (this.state.click1%2==0){ // clicked button style
+      if (this.state.click12%2==0){ // clicked button style
           _style12 = {
               opacity: 1
           }
