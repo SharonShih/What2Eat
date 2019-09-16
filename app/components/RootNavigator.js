@@ -16,6 +16,7 @@ import ChooseFavorite from '../scenes/ChooseFavorite';
 import {Icon} from "native-base";
 import YelpSearchRequest from "./YelpSearchRequest";
 import Logout from '../scenes/Logout';
+import GroupPage from '../scenes/GroupPage';
 
 const CustomDrawComponent = (props) => (
   <SafeAreaView style={{flex: 1, backgroundColor: '#7174BF'}}>
@@ -51,6 +52,7 @@ export const AppDrawerNavigator = createDrawerNavigator({
   Profile: Profile,
   History: HistoryScreen,
   Logout: Logout,
+  Group: GroupPage,
 }, {
   contentComponent: CustomDrawComponent,
   contentOptions: {
