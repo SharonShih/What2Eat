@@ -22,21 +22,21 @@ export default class Profile extends Component<Props> {
   onPressedSubmit() {
     return fetch (
       'https://us-central1-what2eat-9458a.cloudfunctions.net/createGroup', {
-        method: 'GET',
-        body: {
+        method: 'POST',
+        body: JSON.stringify({
           userId: Firebase.auth().currentUser.uid
-        }
+        }),
     })
-      .then ((response) => {
-        console.log(response)
-        this.setState({groupId: response})
-          .then(
-            console.log('set state done')
-          )
-      })
-      .catch((error) => {
-      console.log(error.message)
-      })
+      // .then ((response) => {
+      //   console.log(response)
+      //   this.setState({groupId: response})
+      //     .then(
+      //       console.log('set state done')
+      //     )
+      // })
+      // .catch((error) => {
+      // console.log(error.message)
+      // })
   }
 
   componentDidMount() {
@@ -65,8 +65,7 @@ export default class Profile extends Component<Props> {
               <Button
                 title="Create Group"
                 color="#5A6978"
-                onPress={this.onPressedSubmit} />
-
+                onPress={() => this.onPressedSubmit()} />
             </TouchableHighlight>
 
 
