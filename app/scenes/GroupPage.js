@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Header, Left, Right, Icon} from 'native-base'
+import {Header, Left, Icon} from 'native-base'
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
-  TouchableOpacity,
   ImageBackground, Alert, Button, ScrollView, TouchableHighlight, Image,
 } from "react-native";
 import Firebase from "../../services/Firebase";
@@ -15,11 +15,12 @@ export default class Profile extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      groupId: ''
+      userId: Firebase.auth().currentUser.uid,
+      groupId: '',
     }
   }
 
-  onPressedSubmit() {
+  onPressedCreate() {
     return fetch (
       'https://us-central1-what2eat-9458a.cloudfunctions.net/createGroup', {
         method: 'POST',
@@ -27,18 +28,34 @@ export default class Profile extends Component<Props> {
           userId: Firebase.auth().currentUser.uid
         }),
     })
-      // .then ((response) => {
-      //   console.log(response)
-      //   this.setState({groupId: response})
-      //     .then(
-      //       console.log('set state done')
-      //     )
-      // })
-      // .catch((error) => {
-      // console.log(error.message)
-      // })
+      .then ((response) => {
+        response.json().then(function(data) {
+          this.setState({groupId: data})
+          //TODO: display response group Id page
+        }.bind(this))
+      })
+      .catch((error) => {
+      console.log(error.message)
+      })
   }
 
+  onPressedJoin() {
+    return fetch (
+      'https://us-central1-what2eat-9458a.cloudfunctions.net/joinGroup', {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+      })
+      .then ((response) => {
+        response.json().then(function(data) {
+          console.log(data)
+          //TODO: display response group Id page
+        }.bind(this))
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
+
+  }
   componentDidMount() {
 
   }
@@ -58,17 +75,30 @@ export default class Profile extends Component<Props> {
         <ScrollView>
           <View style={styles.ProfileForm}>
             <Image source={ require ('../components/w2e_logo.png')} style={styles.logo}></Image>
-
-
             <TouchableHighlight
               style ={styles.Button2}>
               <Button
                 title="Create Group"
                 color="#5A6978"
-                onPress={() => this.onPressedSubmit()} />
+                onPress={() => this.onPressedCreate()} />
             </TouchableHighlight>
 
-
+            <TextInput
+              style={{height: 40}}
+              maxLength={6}
+              placeholder="Enter Your Mobile Number"
+              underlineColorAndroid='transparent'
+              keyboardType={'numeric'}
+              onChangeText={(groupId) => this.setState({groupId})}
+              value={this.state.groupId}
+            />
+            <TouchableHighlight
+              style ={styles.Button2}>
+              <Button
+                title="Join Group"
+                color="#5A6978"
+                onPress={() => this.onPressedJoin()} />
+            </TouchableHighlight>
           </View>
         </ScrollView>
       </ImageBackground>
