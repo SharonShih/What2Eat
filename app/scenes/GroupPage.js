@@ -10,8 +10,10 @@ import {
 import Firebase from "../../services/Firebase";
 
 
+
 type Props = {};
 export default class GroupPage extends Component<Props> {
+
   constructor(props) {
     super(props);
     this.state = {
