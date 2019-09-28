@@ -64,7 +64,7 @@ export default class MainPage extends Component<Props> {
       };
       this.setState({initialPosition: initialRegion})
     }, (error) => {
-      Alert.alert(error.message);
+      Console.log(error.message);
     })
 
 

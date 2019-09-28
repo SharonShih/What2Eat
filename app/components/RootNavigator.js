@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {createDrawerNavigator, createStackNavigator, DrawerItems,} from 'react-navigation';
 import 'firebase/firestore';
 import {
@@ -6,7 +6,6 @@ import {
   View,
   SafeAreaView,
   ScrollView,
-  Dimensions
 } from "react-native";
 import HistoryScreen from '../scenes/HistoryScreen';
 import Profile from '../scenes/Profile';
@@ -17,6 +16,7 @@ import {Icon} from "native-base";
 import YelpSearchRequest from "./YelpSearchRequest";
 import Logout from '../scenes/Logout';
 import GroupPage from '../scenes/GroupPage';
+import GroupDetail from "../scenes/GroupDetail";
 
 const CustomDrawComponent = (props) => (
   <SafeAreaView style={{flex: 1, backgroundColor: '#7174BF'}}>
@@ -29,17 +29,30 @@ const CustomDrawComponent = (props) => (
   </SafeAreaView>
 )
 
+//main stack navigator of the app
+//TODO: separate them into different stack navigator from their function
 export const AppStackNavigator = createStackNavigator({
   MainPage: MainPage,
   SearchDisplayPage: SearchDisplayPage,
   ChooseFavorite: ChooseFavorite,
-  YelpSearchRequest: YelpSearchRequest
+  YelpSearchRequest: YelpSearchRequest,
 }, {
   initialPage: 'MainPage',
   headerMode: 'none',
   navigationOptions: {header: {visible: false}} // ADDED THIS
 });
 
+//stack navigator handle group feature
+export const GroupStackNavigator = createStackNavigator({
+  Group: GroupPage,
+  GroupDetail: GroupDetail,
+}, {
+  initialPage: 'GroupPage',
+  headerMode: 'none',
+  navigationOptions: {header: {visible: false}} // ADDED THIS
+});
+
+//main menu drawer navigator
 export const AppDrawerNavigator = createDrawerNavigator({
   MainPage: {
     screen: AppStackNavigator,
@@ -51,8 +64,10 @@ export const AppDrawerNavigator = createDrawerNavigator({
   },
   Profile: Profile,
   History: HistoryScreen,
+  Group: {
+    screen: GroupStackNavigator,
+  },
   Logout: Logout,
-  Group: GroupPage,
 }, {
   contentComponent: CustomDrawComponent,
   contentOptions: {
