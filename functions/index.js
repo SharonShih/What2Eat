@@ -44,9 +44,32 @@ exports.createGroup = functions.https.onRequest((request, response) => {
 
 exports.joinGroup = functions.https.onRequest((request, response) => {
   let body = JSON.parse(request.body)
+  let groupId = body.groupId
   let userId = body.userId
   if (request.method !== 'POST') {
     return response.status(400).send('Request Not allowed')
   }
-
+  let docRef = db.collection("groups").doc(groupId);
+  docRef.get()
+    .then(function (doc) {
+      if (doc.exists) {
+        let tempArr = doc.get('groupMember');
+        tempArr.push(userId);
+        docRef.update({
+          'groupMember': tempArr,
+        })
+          .then(() => {
+            return response.status(200).send("Join succeed")
+          })
+          .catch((err) => {
+            return response.status(500).send(err.message)
+          })
+        return response.status(200).end()
+      } else {
+        return response.status(500).send("Group does not exist")
+      }
+    })
+    .catch(error => {
+      return response.status(500).send(error.message)
+    })
 })
