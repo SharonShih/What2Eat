@@ -11,42 +11,46 @@ import Firebase from "../../services/Firebase";
 
 
 type Props = {};
-export default class Profile extends Component<Props> {
+export default class GroupPage extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
       userId: Firebase.auth().currentUser.uid,
       groupId: '',
+      isGroupOwner: false,
     }
   }
 
   onPressedCreate() {
-    return fetch (
+    return fetch(
       'https://us-central1-what2eat-9458a.cloudfunctions.net/createGroup', {
         method: 'POST',
         body: JSON.stringify({
           userId: Firebase.auth().currentUser.uid
         }),
-    })
-      .then ((response) => {
-        response.json().then(function(data) {
-          this.setState({groupId: data})
+      })
+      .then((response) => {
+        response.json().then(function (data) {
+          this.setState({
+            groupId: data,
+            isGroupOwner: true,
+          })
           //TODO: display response group Id page
         }.bind(this))
       })
       .catch((error) => {
-      console.log(error.message)
+        console.log(error.message)
       })
   }
 
   onPressedJoin() {
-    return fetch (
+    return fetch(
       'https://us-central1-what2eat-9458a.cloudfunctions.net/joinGroup', {
         method: 'POST',
         body: JSON.stringify(this.state),
       })
-      .then ((response) => {
-        response.json().then(function(data) {
+      .then((response) => {
+        response.json().then(function (data) {
           console.log(data)
           //TODO: display response group Id page
         }.bind(this))
@@ -56,7 +60,43 @@ export default class Profile extends Component<Props> {
       })
 
   }
+
+  checkGroupOwner = (callback) =>  {
+    let db = Firebase.firestore(Firebase);
+    let docRef = db.collection("groups").where('groupOwner', '==', this.state.userId)
+    docRef.get()
+      .then(snapshot => {
+        if (!snapshot.empty) {
+          snapshot.forEach(doc => {
+            if (snapshot.size === 1) {
+              this.setState({
+                groupId: doc.id,
+                isGroupOwner: true,
+              });
+              console.log(this.state);
+              callback();
+              return;
+            } else {
+              console.log("catch group ID failed");
+            }
+          });
+          return;
+        }
+      })
+      .catch(err => {
+        console.log('Error getting documents: ', err);
+      });
+  }
+
+  nevigator = () =>  {
+    this.props.navigation.navigate('GroupDetail',
+      {groupId: this.state.groupId,
+      isGroupOwner: this.state.isGroupOwner
+      });
+  }
+
   componentDidMount() {
+    this.checkGroupOwner(this.nevigator);
 
   }
 
@@ -67,20 +107,20 @@ export default class Profile extends Component<Props> {
         style={styles.Background}>
         <Header style={{backgroundColor: "#7174BF"}}>
           <Left>
-            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
+            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer()}/>
           </Left>
           <Text style={styles.headerTitle}>Group</Text>
         </Header>
 
         <ScrollView>
           <View style={styles.ProfileForm}>
-            <Image source={ require ('../components/w2e_logo.png')} style={styles.logo}></Image>
+            <Image source={require('../components/w2e_logo.png')} style={styles.logo}></Image>
             <TouchableHighlight
-              style ={styles.Button2}>
+              style={styles.Button2}>
               <Button
                 title="Create Group"
                 color="#5A6978"
-                onPress={() => this.onPressedCreate()} />
+                onPress={() => this.onPressedCreate()}/>
             </TouchableHighlight>
 
             <TextInput
@@ -93,11 +133,11 @@ export default class Profile extends Component<Props> {
               value={this.state.groupId}
             />
             <TouchableHighlight
-              style ={styles.Button2}>
+              style={styles.Button2}>
               <Button
                 title="Join Group"
                 color="#5A6978"
-                onPress={() => this.onPressedJoin()} />
+                onPress={() => this.onPressedJoin()}/>
             </TouchableHighlight>
           </View>
         </ScrollView>
@@ -125,10 +165,10 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 30,
 
-    marginRight:90,
-    marginLeft:100,
+    marginRight: 90,
+    marginLeft: 100,
   },
-  headerTitle:{
+  headerTitle: {
     color: 'white',
     fontSize: 15,
     justifyContent: 'center',
@@ -197,7 +237,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     color: 'white',
   },
-  Button2:{
+  Button2: {
     height: 45,
     width: 250,
     borderRadius: 10,

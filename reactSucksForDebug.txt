@@ -1,0 +1,8 @@
+Xcode 11 update problem:
+https://github.com/facebook/react-native/issues/25154
+
+Xcode 11 `react-native run-ios` returns Error: Could not find iPhone X simulator:
+https://stackoverflow.com/questions/54504076/react-native-run-ios-returns-error-could-not-find-iphone-x-simulator
+
+Unrecognized font family 'Ionicons':
+https://github.com/oblador/react-native-vector-icons/issues/721
