@@ -10,9 +10,18 @@ import {
 
 
 const FoodPicture=(props)=>{
+    let imageOpacity = props.FoodSelected ? 0.2 : 1;
+    // let imageOpacity = 0.2
+
     return(
-            <TouchableOpacity onPress={props.onPress}>
-                <Image style={styles.imageOffood} source={props.FoodPicture} onPress={()=>props.onPress}/>
+            <TouchableOpacity
+                onPress={props.onPress}
+                // why need to call onpress
+            >
+                <Image
+                    style={[styles.imageOffood,{opacity:imageOpacity}]}
+                    source={props.FoodPicture}
+                />
             </TouchableOpacity>
     )
 }
