@@ -63,17 +63,21 @@ export default class GroupPage extends Component<Props> {
 
   }
 
-  checkGroupOwner = (callback) =>  {
+  checkGroupMember = (callback) =>  {
     let db = Firebase.firestore(Firebase);
-    let docRef = db.collection("groups").where('groupOwner', '==', this.state.userId)
+    let docRef = db.collection("groups").where('groupMember', 'array-contains', this.state.userId)
     docRef.get()
       .then(snapshot => {
         if (!snapshot.empty) {
           snapshot.forEach(doc => {
             if (snapshot.size === 1) {
+              if (doc.data().groupOwner === this.state.userId) {
+                this.setState({
+                  isGroupOwner: true
+                });
+              }
               this.setState({
                 groupId: doc.id,
-                isGroupOwner: true,
               });
               console.log(this.state);
               callback();
@@ -98,8 +102,7 @@ export default class GroupPage extends Component<Props> {
   }
 
   componentDidMount() {
-    this.checkGroupOwner(this.nevigator);
-
+    this.checkGroupMember(this.nevigator);
   }
 
   render() {
