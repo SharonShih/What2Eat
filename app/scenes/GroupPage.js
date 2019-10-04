@@ -37,7 +37,7 @@ export default class GroupPage extends Component<Props> {
             groupId: data,
             isGroupOwner: true,
           })
-          //TODO: display response group Id page
+          this.navigator();
         }.bind(this))
       })
       .catch((error) => {
@@ -52,10 +52,12 @@ export default class GroupPage extends Component<Props> {
         body: JSON.stringify(this.state),
       })
       .then((response) => {
-        response.json().then(function (data) {
-          console.log(data)
-          //TODO: display response group Id page
-        }.bind(this))
+        console.log(response.status === 200)
+        if (response.status === 200) {
+          this.navigator();
+        } else {
+          Alert.alert("Group does not exist");
+        }
       })
       .catch((error) => {
         console.log(error.message)
@@ -94,7 +96,7 @@ export default class GroupPage extends Component<Props> {
       });
   }
 
-  nevigator = () =>  {
+  navigator = () =>  {
     this.props.navigation.navigate('GroupDetail',
       {groupId: this.state.groupId,
       isGroupOwner: this.state.isGroupOwner
@@ -102,7 +104,7 @@ export default class GroupPage extends Component<Props> {
   }
 
   componentDidMount() {
-    this.checkGroupMember(this.nevigator);
+    this.checkGroupMember(this.navigator);
   }
 
   render() {
@@ -134,9 +136,9 @@ export default class GroupPage extends Component<Props> {
               placeholder="Enter Your Mobile Number"
               underlineColorAndroid='transparent'
               keyboardType={'numeric'}
-              onChangeText={(groupId) => this.setState({groupId})}
-              value={this.state.groupId}
+              onChangeText={(text) => this.setState({groupId: text})}
             />
+
             <TouchableHighlight
               style={styles.Button2}>
               <Button
