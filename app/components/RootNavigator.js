@@ -16,7 +16,8 @@ import {Icon} from "native-base";
 import YelpSearchRequest from "./YelpSearchRequest";
 import Logout from '../scenes/Logout';
 import GroupPage from '../scenes/GroupPage';
-import GroupDetail from "../scenes/GroupDetail";
+import GroupOwnerDetail from "../scenes/GroupOwnerDetail";
+import GroupMemberDetail from "../scenes/GroupMemberDetail";
 
 const CustomDrawComponent = (props) => (
   <SafeAreaView style={{flex: 1, backgroundColor: '#7174BF'}}>
@@ -45,7 +46,8 @@ export const AppStackNavigator = createStackNavigator({
 //stack navigator handle group feature
 export const GroupStackNavigator = createStackNavigator({
   Group: GroupPage,
-  GroupDetail: GroupDetail,
+  GroupOwnerDetail: GroupOwnerDetail,
+  GroupMemberDetail: GroupMemberDetail,
 }, {
   initialPage: 'GroupPage',
   headerMode: 'none',
@@ -66,6 +68,11 @@ export const AppDrawerNavigator = createDrawerNavigator({
   History: HistoryScreen,
   Group: {
     screen: GroupStackNavigator,
+    navigationOptions: {
+      drawerIcon: ({tintColor}) => (
+        <Icon type={"FontAwesome"} name={'group'} style={{fontSize: 24, color: 'white'}}/>
+      )
+    }
   },
   Logout: Logout,
 }, {
