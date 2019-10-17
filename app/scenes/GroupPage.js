@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import {Header, Left, Icon} from 'native-base'
 import {
   StyleSheet,
@@ -9,7 +10,7 @@ import {
 } from "react-native";
 import Firebase from "../../services/Firebase";
 
-
+//TODO: instead passing information of group, pass group doc
 
 type Props = {};
 export default class GroupPage extends Component<Props> {
@@ -34,7 +35,7 @@ export default class GroupPage extends Component<Props> {
       .then((response) => {
         response.json().then(function (data) {
           this.setState({
-            groupId: data,
+            groupId: data.toString(),
             isGroupOwner: true,
           })
           this.navigator();
@@ -97,10 +98,19 @@ export default class GroupPage extends Component<Props> {
   }
 
   navigator = () =>  {
-    this.props.navigation.navigate('GroupDetail',
-      {groupId: this.state.groupId,
-      isGroupOwner: this.state.isGroupOwner
-      });
+    if (this.state.isGroupOwner) {
+      this.props.navigation.navigate('GroupOwnerDetail',
+        {
+          groupId: this.state.groupId,
+          isGroupOwner: this.state.isGroupOwner
+        });
+    } else {
+      this.props.navigation.navigate('GroupMemberDetail',
+        {
+          groupId: this.state.groupId,
+          isGroupOwner: this.state.isGroupOwner
+        });
+    }
   }
 
   componentDidMount() {
@@ -131,9 +141,9 @@ export default class GroupPage extends Component<Props> {
             </TouchableHighlight>
 
             <TextInput
-              style={{height: 40}}
+              style={styles.textInput}
               maxLength={6}
-              placeholder="Enter Your Mobile Number"
+              placeholder="Enter Your Group Code To Join"
               underlineColorAndroid='transparent'
               keyboardType={'numeric'}
               onChangeText={(text) => this.setState({groupId: text})}
@@ -253,5 +263,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 20,
   },
+  textInput: {
 
+    alignSelf: 'stretch',
+    fontSize: 20,
+    color: "#FFF",
+    marginBottom: 25,
+    marginTop: 10,
+    height: 40,
+    borderBottomColor: "#FFF",
+    borderBottomWidth: 0.5,
+    marginHorizontal: 20,
+
+  },
 });
