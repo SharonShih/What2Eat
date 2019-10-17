@@ -4,18 +4,14 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   ImageBackground,
-  TouchableHighlight,
-  Image,
   ScrollView,
-  TextInput, Animated, TouchableOpacity, Easing
 } from 'react-native';
 import Firebase from '../../services/Firebase';
 import {Header, Icon, Left} from "native-base";
-import ModalSelector from "react-native-modal-selector";
 
-export default class Home extends Component<Props> {
+//TODO: add leave group
+export default class GroupMemberDetail extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,21 +23,31 @@ export default class Home extends Component<Props> {
     }
   }
 
+  navigator = () =>  {
+    if (this.state.groupDoc.result) {
+      console.log(this.state.groupDoc.result)
+      this.props.navigation.navigate('MemberSearchDisplayPage',
+        {
+          groupDoc: this.state.groupDoc
+        });
+    }
+  }
+
   componentDidMount() {
 
     //TODO: change it later
     let db = Firebase.firestore(Firebase);
     let docRef = db.collection("groups").doc(this.state.groupId);
-    docRef.get().then( (doc) => {
-      if (doc.exists) {
-        this.setState({groupDoc: doc.data()})
-      }
-    })
+    docRef.get()
+      .then( (doc) => {
+          this.setState({groupDoc: doc.data()})
+      })
 
     let query = db.collection('groups').doc(this.state.groupId);
     let observer = query.onSnapshot(querySnapshot => {
-      console.log(querySnapshot);
+      console.log(querySnapshot.data());
       this.setState({groupDoc: querySnapshot.data()})
+      this.navigator();
     }, err => {
       console.log(`Encountered error: ${err}`);
     });
@@ -73,6 +79,11 @@ export default class Home extends Component<Props> {
             <Text style={styles.totalNumberText} >
               {length}
             </Text>
+
+            <Text style={styles.statusText} >
+              Waiting for group owner to genergate result...
+            </Text>
+
           </View>
         </ScrollView>
       </ImageBackground>
@@ -109,6 +120,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#FFF',
     marginBottom: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  statusText: {
+    fontSize: 15,
+    color: '#FFF',
+    marginTop: 50,
     fontWeight: 'bold',
     alignSelf: 'center',
   },

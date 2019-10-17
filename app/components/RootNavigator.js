@@ -18,6 +18,7 @@ import Logout from '../scenes/Logout';
 import GroupPage from '../scenes/GroupPage';
 import GroupOwnerDetail from "../scenes/GroupOwnerDetail";
 import GroupMemberDetail from "../scenes/GroupMemberDetail";
+import MemberSearchDisplayPage from "../scenes/MemberSearchDisplayPage";
 
 const CustomDrawComponent = (props) => (
   <SafeAreaView style={{flex: 1, backgroundColor: '#7174BF'}}>
@@ -48,6 +49,7 @@ export const GroupStackNavigator = createStackNavigator({
   Group: GroupPage,
   GroupOwnerDetail: GroupOwnerDetail,
   GroupMemberDetail: GroupMemberDetail,
+  MemberSearchDisplayPage: MemberSearchDisplayPage,
 }, {
   initialPage: 'GroupPage',
   headerMode: 'none',

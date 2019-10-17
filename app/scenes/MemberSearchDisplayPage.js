@@ -4,7 +4,7 @@ import {ImageBackground, Image, StyleSheet, Text, View, Button, Linking, Touchab
 import {Icon} from "native-base";
 import Firebase from '../../services/Firebase';
 
-export default class YelpSearchRequest extends Component<Props> {
+export default class MemberSearchDisplayPage extends Component<Props> {
   static navigationOptions = {
     title: 'Result',
     headerStyle: {
@@ -28,44 +28,16 @@ export default class YelpSearchRequest extends Component<Props> {
     super(props);
     this.state = {
       isLoading: true,
-      dataSource: null,
-      searchInfo: this.props.navigation.getParam('searchInfo', ''),
-      randomNum: 0,
-      groupId: this.props.navigation.getParam('groupId', ''),
+      groupDoc: this.props.navigation.getParam('groupDoc', ''),
+      result: "",
     }
   };
 
   componentDidMount() {
-    return fetch(this.state.searchInfo, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + YelpAuth,
-      }
+    this.setState( {
+      result: this.state.groupDoc.result,
+      isLoading: false,
     })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        //TODO: Avoid the situation when the businesses is closed
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.businesses,
-        });
-        this.randomChoice();
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-  }
-
-  randomChoice() {
-    var min = 0;
-    var max = this.state.dataSource.length;
-    var random = Math.floor(Math.random() * (+max - +min)) + +min;
-    console.log(this.state.dataSource.length);
-    console.log("random:" + String(random));
-    this.setState({
-      randomNum: random,
-    })
-
   }
 
   goPlace(url) {
@@ -82,7 +54,6 @@ export default class YelpSearchRequest extends Component<Props> {
         for (let index = 0; index < field.length; index++) {
           tempArray.push(field[index]);
         }
-        tempArray.push(this.state.dataSource[this.state.randomNum]);
         docRef.update(
           {
             visited_restaurant: tempArray,
@@ -99,18 +70,7 @@ export default class YelpSearchRequest extends Component<Props> {
     }.bind(this)).catch(function (error) {
       console.log("Error getting document:", error);
     });
-    if (this.state.groupId !== '') {
-      let docRef = db.collection('groups').doc(this.state.groupId);
-      docRef.update({result: this.state.dataSource[this.state.randomNum]})
-        .then(function() {
-          console.log("Document successfully updated!");
-        })
-        .catch(function(error) {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
-    }
-    this.props.navigation.goBack();
+    this.props.navigation.navigate('MainPage', '');
     Linking.openURL(url);
   }
 
@@ -121,17 +81,17 @@ export default class YelpSearchRequest extends Component<Props> {
         </View>
       )
     } else {
-      let name = this.state.dataSource[this.state.randomNum].name;
-      let image_url = this.state.dataSource[this.state.randomNum].image_url;
-      let categoriesRef = this.state.dataSource[this.state.randomNum].categories;
+      let name = this.state.result.name;
+      let image_url = this.state.result.image_url;
+      let categoriesRef = this.state.result.categories;
       let categories = [];
       for (let i = 0; i < categoriesRef.length; i++) {
         categories.push(categoriesRef[i].title);
       }
-      let location = this.state.dataSource[this.state.randomNum].location.display_address.join(', ');
-      let rating = this.state.dataSource[this.state.randomNum].rating;
-      let display_phone = this.state.dataSource[this.state.randomNum].display_phone;
-      let coordinates = this.state.dataSource[this.state.randomNum].coordinates.latitude + "+" + this.state.dataSource[this.state.randomNum].coordinates.longitude;
+      let location = this.state.result.location.display_address.join(', ');
+      let rating = this.state.result.rating;
+      let display_phone = this.state.result.display_phone;
+      let coordinates = this.state.result.coordinates.latitude + "+" + this.state.result.coordinates.longitude;
       //TODO: GOOGLE MAP
       // let google = "google.navigation:q=" + coordinates;
       let apple = "maps://app?daddr=" + coordinates;
@@ -157,14 +117,6 @@ export default class YelpSearchRequest extends Component<Props> {
                 title="Let's Go!"
                 color="#000099"
                 onPress={() => this.goPlace(apple)}/>
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              style={styles.nextButton}>
-              <Button
-                title="Next&#8594;"
-                color="#000"
-                onPress={() => this.randomChoice()}/>
             </TouchableHighlight>
           </View>
         </ImageBackground>

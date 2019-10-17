@@ -10,6 +10,7 @@ import {
 import Firebase from "../../services/Firebase";
 import ModalSelector from "react-native-modal-selector";
 
+//TODO: add delete group
 
 type Props = {};
 export default class GroupOwnerDetail extends Component<Props> {
@@ -75,7 +76,7 @@ export default class GroupOwnerDetail extends Component<Props> {
     let searchInfo = 'https://api.yelp.com/v3/businesses/search?term=restaurants&latitude='
       + this.state.initialPosition.latitude + '&longitude=' + this.state.initialPosition.longitude
       + '&radius=' + this.state.radius.toString();
-    this.props.navigation.navigate('SearchDisplayPage', {searchInfo: searchInfo});
+    this.props.navigation.navigate('SearchDisplayPage', {searchInfo: searchInfo, groupId: this.state.groupId});
   }
 
   render() {
