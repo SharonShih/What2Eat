@@ -8,7 +8,7 @@ export default class Home extends Component<Props> {
 
   static navigationOptions={
     drawerIcon:({tintColor})=>(
-      <Icon name={'md-exit'} style={{fontSize:24, color: 'white'}}/>
+      <Icon name={'md-exit'} style={{fontSize:24, color: 'purple'}}/>
     )
   }
 
@@ -28,7 +28,7 @@ export default class Home extends Component<Props> {
 
             <Button
               title="Yes, Sign Me Out"
-              color="#5A6978"
+              color="#FFF"
               onPress={() => this.onPressSignOut()} />
           </TouchableHighlight>
 
@@ -38,7 +38,7 @@ export default class Home extends Component<Props> {
             style ={styles.signinButton2}>
             <Button
               title="No, go back to Home."
-              color="#5A6978"
+              color="#FFF"
               onPress={() => this.props.navigation.navigate("MainPage")} />
           </TouchableHighlight>
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   text:{
-    color:'#FFF',
+    color:'#000',
     fontSize: 30,
     paddingHorizontal: 60,
     paddingBottom: 20,
@@ -68,26 +68,25 @@ const styles = StyleSheet.create({
 
   },
   text2:{
-    color: '#FFF',
+    color: '#000',
     textAlign: 'center',
     fontSize: 20,
     marginBottom: 30,
 
   },
   signinButton2:{
-    height: 45,
+    height: 60,
     width: 280,
-    borderRadius: 10,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     paddingHorizontal: 40,
     marginBottom: 40,
     marginTop: 5,
+    paddingTop: 10,
   },
   logo: {
 
-    width: 130,
-    height: 130,
-
+    marginTop: 30,
     marginRight:90,
     marginLeft:100,
   },

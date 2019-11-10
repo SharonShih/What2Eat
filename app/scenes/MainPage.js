@@ -101,14 +101,14 @@ export default class MainPage extends Component<Props> {
     return (
       <ImageBackground source={require('../components/Stellar.png')}
                        style={styles.Background}>
-        <Header style={{backgroundColor: "#7174BF"}}>
+        <Header style={{backgroundColor: "#s9b989c"}}>
           <Left>
-            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
+            <Icon name={'menu'} style={{color: "black"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
           <Text style={styles.headerTitle}>What2Eat</Text>
 
         </Header>
-        <Text style={styles.greeting}>{new Date().toDateString()}</Text>
+        <Text style={styles.greeting}>GREENTINGS!!!{"\n"}{new Date().toDateString()}</Text>
 
         <View style={styles.Button2}>
           <ModalSelector
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   headerTitle:{
 
-    color: 'white',
+    color: 'black',
     fontSize: 15,
     justifyContent: 'center',
     paddingTop: 20,
@@ -165,10 +165,10 @@ const styles = StyleSheet.create({
   greeting:{
 
     fontSize: 18,
-    color: 'white',
-    marginTop: 20,
+    color: 'black',
+    marginTop: 40,
     textAlign:'left',
-    paddingLeft: 20,
+    paddingLeft: 30,
     paddingBottom: 20,
 
   },
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderColor: '#FFF',
+    borderColor: '#000',
     opacity: 0.4,
     width: 280,
     height: 280,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   circle: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     opacity: 0.5,
     borderRadius: 120,
     width: 240,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   circleText: {
     fontSize: 30,
-    color: '#FFF',
+    color: '#000',
     textAlign: 'center',
     position: 'absolute',
     paddingTop: 155,
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     width: 280,
     borderRadius: 10,
     //backgroundColor: "white",
-    color: 'white',
+    color: 'black',
     paddingHorizontal: 25,
     marginBottom: 10,
     marginTop: 10,

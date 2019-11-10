@@ -23,7 +23,7 @@ export default class Profile extends Component<Props> {
 
   static navigationOptions = {
     drawerIcon: ({tintColor}) => (
-      <Icon name={'md-person'} style={{fontSize: 24, color: 'white'}}/>
+      <Icon name={'md-person'} style={{fontSize: 24, color: 'purple'}}/>
     )
   }
   onPressedSubmit = () => {
@@ -69,16 +69,16 @@ export default class Profile extends Component<Props> {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <Header style={{backgroundColor: "#7174BF"}}>
+        <Header style={{backgroundColor: "##s9b989c"}}>
           <Left>
-            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
+            <Icon name={'menu'} style={{color: "black"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
           <Text style={styles.headerTitle}>Profile</Text>
         </Header>
 
         <ScrollView>
           <View style={styles.ProfileForm}>
-            <Image source={ require ('../components/w2e_logo.png')} style={styles.logo}></Image>
+            <Image source={ require ('../components/avatar.png')} style={styles.logo}></Image>
 
 
             <Text style={styles.infoTitle}>Account ID</Text>
@@ -98,7 +98,7 @@ export default class Profile extends Component<Props> {
               style ={styles.Button2}>
               <Button
                 title="Edit Preference"
-                color="#5A6978"
+                color="#FFF"
                 onPress={() => this.onPressedSubmit()} />
 
             </TouchableHighlight>
@@ -125,16 +125,15 @@ const styles = StyleSheet.create({
   },
   logo: {
 
-    width: 150,
-    height: 150,
     paddingTop: 50,
-    paddingBottom: 30,
+    paddingBottom: 50,
 
+    marginTop: 20,
     marginRight:90,
-    marginLeft:100,
+    marginLeft:70,
   },
   headerTitle:{
-    color: 'white',
+    color: 'black',
     fontSize: 15,
     justifyContent: 'center',
     paddingTop: 20,
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: '#000',
     marginBottom: 10,
   },
   infoBox: {
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderBottomColor: '#FFF',
+    borderBottomColor: '#000',
     borderBottomWidth: 0.5,
     borderTopWidth: 0,
     borderLeftWidth: 0,
@@ -161,10 +160,10 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 20,
-    color: '#FFF',
+    color: '#000',
   },
   button: {
-    color: '#FFF',
+    color: '#000',
     opacity: 0.7,
     textAlign: 'left',
     fontSize: 23,
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
   chips: {
     borderStyle: 'solid',
     borderWidth: 1.5,
-    borderColor: "#FFF",
+    borderColor: "#000",
     borderRadius: 32,
     height: 40,
     marginBottom: 10,
@@ -184,32 +183,33 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontSize: 18,
-    color: "#FFF",
+    color: "#000",
     textAlign: 'left',
     marginTop: 8,
     marginLeft: 10,
     marginRight: 10,
   },
   chipButton: {
-    color: "#FFF",
+    color: "#000",
     fontSize: 25,
     marginLeft: 5,
     marginRight: 10,
     marginBottom: 10,
   },
   submit: {
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 1,
     color: 'white',
   },
   Button2:{
-    height: 45,
+    height: 60,
     width: 250,
-    borderRadius: 10,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     marginLeft: 30,
     marginBottom: 10,
     marginTop: 20,
+    paddingTop: 10,
   },
 
 });

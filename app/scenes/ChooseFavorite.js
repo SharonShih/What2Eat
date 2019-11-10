@@ -230,7 +230,7 @@ export default class ChooseFavorite extends Component {
           style ={styles.submit}>
           <Button
             title="Submit"
-            color="#5A6978"
+            color="#FFF"
             onPress={() => this.onPressedSubmit()} />
         </TouchableHighlight>
         </ScrollView>
@@ -246,14 +246,15 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   submit:{
-    height: 45,
+    height: 60,
     width: 250,
-    borderRadius: 10,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     marginLeft: 30,
     marginBottom: 10,
     marginTop: 20,
     alignSelf: 'center',
+    paddingTop: 10,
   },
   imageLayout: {
     flexDirection: 'row',

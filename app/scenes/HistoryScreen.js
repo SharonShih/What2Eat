@@ -13,7 +13,7 @@ import Firebase from "../../services/Firebase";
 export default class HistoryScreen extends Component {
   static navigationOptions = {
     drawerIcon: ({tintColor}) => (
-      <Icon name={'ios-time'} style={{fontSize: 24, color: 'white'}}/>
+      <Icon name={'ios-time'} style={{fontSize: 24, color: 'purple'}}/>
     )
   }
 
@@ -67,9 +67,9 @@ export default class HistoryScreen extends Component {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <Header style={{backgroundColor: "#7174BF"}}>
+        <Header style={{backgroundColor: "##s9b989c"}}>
           <Left>
-            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
+            <Icon name={'menu'} style={{color: "black"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
           <Text style={styles.headerTitle}>History</Text>
         </Header>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   headerTitle:{
-    color: 'white',
+    color: 'black',
     fontSize: 15,
     justifyContent: 'center',
     paddingTop: 20,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     width: 290,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderBottomColor: '#FFF',
+    borderBottomColor: '#000',
     borderBottomWidth: 0.7,
     borderTopWidth: 0,
     borderLeftWidth: 0,
@@ -121,19 +121,19 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlign: "right",
     paddingRight: 5,
-    color: '#FFF',
+    color: '#000',
   },
   info1:{
     fontSize: 17,
-    color: '#FFF',
+    color: '#000',
   },
   info2:{
     fontSize: 15,
-    color: '#c4cdff',
+    color: '#666666',
 
   },
   flag: {
-    color: '#FFF',
+    color: '#000',
     fontSize: 20,
     paddingRight: 15,
     paddingTop: 30,

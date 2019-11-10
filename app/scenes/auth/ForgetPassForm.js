@@ -31,14 +31,14 @@ export default class ForgetPassForm extends Component<Props> {
 
         <Image source={ require ('../../components/w2e_logo.png')} style={styles.logo}></Image>
 
-        <Text style={styles.welcomeTxt}>Reset Password!</Text>
+        <Text style={styles.welcomeTxt}>Reset Password</Text>
 
 
         <View style = {styles.ForgetPassForm}>
 
           <TextInput style={styles.textInput}
                      placeholder = "Email"
-                     placeholderTextColor="white"
+                     placeholderTextColor="gray"
                      keyboardType = "email-address"
                      autoCapitalize = "none"
                      autoCorrect = { false }
@@ -50,7 +50,7 @@ export default class ForgetPassForm extends Component<Props> {
             style ={styles.restButton}>
             <Button
               title= "Reset"
-              color="#5A6978"
+              color="#FFFFFF"
               onPress={() => this.onPressReset()}
             />
           </TouchableHighlight>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    color: "#FFF",
+    color: "#000",
     paddingBottom: 10,
     marginBottom: 40,
     borderBottomColor: "#000000",
@@ -81,13 +81,12 @@ const styles = StyleSheet.create({
   textInput: {
     alignSelf: 'stretch',
     fontSize: 18,
-    color: "#FFF",
+    color: "#000",
     marginBottom: 20,
     marginHorizontal: 60,
     height: 40,
-    borderBottomColor: "#FFF",
+    borderBottomColor: "#000",
     borderBottomWidth: 1,
-
 
   },
 
@@ -97,19 +96,15 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 150,
-    height: 150,
-
     paddingTop: 50,
     paddingBottom: 30,
-
-    marginRight:90,
-    marginLeft:120,
+    alignSelf: "center",
+    marginTop: 40,
   },
 
   welcomeTxt: {
     letterSpacing: 1,
-    color:"#FFFFFF",
+    color:"#000",
     fontSize: 20,
     textAlign: 'center',
     marginBottom: 35,
@@ -117,14 +112,14 @@ const styles = StyleSheet.create({
   },
 
   restButton:{
-    height: 45,
+    height: 60,
     width: 280,
-    borderRadius: 10,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     marginLeft: 50,
     marginRight: 50,
     marginTop: 10,
-
+    paddingTop: 10,
   },
 
 
