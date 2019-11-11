@@ -21,9 +21,9 @@ import GroupMemberDetail from "../scenes/GroupMemberDetail";
 import MemberSearchDisplayPage from "../scenes/MemberSearchDisplayPage";
 
 const CustomDrawComponent = (props) => (
-  <SafeAreaView style={{flex: 1, backgroundColor: '#7174BF'}}>
-    <View style={{height: 150, backgroundColor: '#7174BF', alignItems: 'center', justifyContent: 'center'}}>
-      <Image source={require('./w2e_logo.png')} style={{height: 130, width: 130, borderRadius: 0}}/>
+  <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
+    <View style={{height: 150, backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center'}}>
+      <Image source={require('./w2e_logo.png')} style={{ borderRadius: 0}}/>
     </View>
     <ScrollView>
       <DrawerItems {...props} />
@@ -62,7 +62,7 @@ export const AppDrawerNavigator = createDrawerNavigator({
     screen: AppStackNavigator,
     navigationOptions: {
       drawerIcon: ({tintColor}) => (
-        <Icon name={'md-home'} style={{fontSize: 24, color: 'white'}}/>
+        <Icon name={'md-home'} style={{fontSize: 24, color: 'purple'}}/>
       )
     }
   },
@@ -72,7 +72,7 @@ export const AppDrawerNavigator = createDrawerNavigator({
     screen: GroupStackNavigator,
     navigationOptions: {
       drawerIcon: ({tintColor}) => (
-        <Icon type={"FontAwesome"} name={'group'} style={{fontSize: 24, color: 'white'}}/>
+        <Icon type={"FontAwesome"} name={'group'} style={{fontSize: 24, color: 'purple'}}/>
       )
     }
   },
@@ -80,11 +80,11 @@ export const AppDrawerNavigator = createDrawerNavigator({
 }, {
   contentComponent: CustomDrawComponent,
   contentOptions: {
-    activeBackgroundColor: '#585d91',
+    activeBackgroundColor: '#9b989c',
 
 
     labelStyle: {
-      color: 'white',
+      color: 'purple',
     },
   }
 });

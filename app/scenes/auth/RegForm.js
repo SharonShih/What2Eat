@@ -61,7 +61,7 @@ export default class RegForm extends Component<Props> {
           <TextInput
             style={styles.textInput}
             placeholder = "Email"
-            placeholderTextColor="white"
+            placeholderTextColor="gray"
             keyboardType = "email-address"
             autoCapitalize = "none"
             autoCorrect = { false }
@@ -71,7 +71,7 @@ export default class RegForm extends Component<Props> {
           <TextInput
             style={styles.textInput}
             placeholder = "Password"
-            placeholderTextColor="white"
+            placeholderTextColor="gray"
             secureTextEntry
             autoCapitalize = "none"
             autoCorrect = { false }
@@ -81,7 +81,7 @@ export default class RegForm extends Component<Props> {
           <TextInput
             style={styles.textInput}
             placeholder = "Confirm Password"
-            placeholderTextColor="white"
+            placeholderTextColor="gray"
             secureTextEntry
             autoCapitalize = "none"
             autoCorrect = { false }
@@ -94,7 +94,7 @@ export default class RegForm extends Component<Props> {
 
             <Button
               title= "Sign Up"
-              color="#5A6978"
+              color="#FFF"
               onPress={() => this.onPressSignUp()} />
 
           </TouchableHighlight>
@@ -120,10 +120,10 @@ const styles = StyleSheet.create({
   textInput: {
     alignSelf: 'stretch',
     fontSize: 18,
-    color: "#FFF",
+    color: "#000",
     marginBottom: 30,
     height: 30,
-    borderBottomColor: "#FFF",
+    borderBottomColor: "#000",
     borderBottomWidth: 1,
     marginHorizontal: 40,
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 
   welcomeTxt: {
     letterSpacing: 1,
-    color:"#FFFFFF",
+    color:"#000",
     fontSize: 22,
     textAlign: 'center',
     marginBottom: 20,
@@ -145,25 +145,21 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-
-    width: 150,
-    height: 150,
-
     paddingTop: 50,
     paddingBottom: 30,
-
-    marginRight:90,
-    marginLeft:120,
+    alignSelf: "center",
+    marginTop: 40,
   },
 
   signupButton: {
-    height: 45,
+    height: 60,
     width: 280,
-    borderRadius: 10,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     marginLeft: 50,
     marginRight: 50,
     marginTop: 20,
+    paddingTop: 10,
   }
 });
 

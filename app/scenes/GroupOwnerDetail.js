@@ -102,9 +102,9 @@ export default class GroupOwnerDetail extends Component<Props> {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <Header style={{backgroundColor: "#7174BF"}}>
+        <Header style={{backgroundColor: "#s7174BF"}}>
           <Left>
-            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
+            <Icon name={'menu'} style={{color: "black"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
           <Text style={styles.headerTitle}>Group</Text>
         </Header>
@@ -161,7 +161,7 @@ export default class GroupOwnerDetail extends Component<Props> {
 const styles = StyleSheet.create({
   titleText: {
     fontSize: 30,
-    color: '#FFF',
+    color: '#000',
     marginTop: 20,
     marginBottom: 20,
     fontWeight: 'bold',
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
   totalNumberText: {
     fontSize: 40,
-    color: '#FFF',
+    color: '#000',
     marginBottom: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
@@ -179,8 +179,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   logo: {
-    width: 150,
-    height: 150,
     paddingTop: 50,
     paddingBottom: 30,
 
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
     marginLeft:100,
   },
   headerTitle: {
-    color: 'white',
+    color: 'black',
     fontSize: 15,
     justifyContent: 'center',
     paddingTop: 20,
@@ -197,7 +195,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    color: '#FFF',
+    color: '#000',
     opacity: 0.7,
     textAlign: 'left',
     fontSize: 23,
@@ -207,7 +205,7 @@ const styles = StyleSheet.create({
   chips: {
     borderStyle: 'solid',
     borderWidth: 1.5,
-    borderColor: "#FFF",
+    borderColor: "#000",
     borderRadius: 32,
     height: 40,
     marginBottom: 10,
@@ -217,30 +215,30 @@ const styles = StyleSheet.create({
   },
   chipText: {
     fontSize: 18,
-    color: "#FFF",
+    color: "#000",
     textAlign: 'left',
     marginTop: 8,
     marginLeft: 10,
     marginRight: 10,
   },
   chipButton: {
-    color: "#FFF",
+    color: "#000",
     fontSize: 25,
     marginLeft: 5,
     marginRight: 10,
     marginBottom: 10,
   },
   submit: {
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 1,
-    color: 'white',
+    color: 'black',
   },
   Button2:{
     height: 45,
     width: 280,
-    borderRadius: 10,
+    borderRadius: 30,
     //backgroundColor: "white",
-    color: 'white',
+    color: 'black',
     paddingHorizontal: 25,
     marginBottom: 10,
     marginTop: 10,
@@ -253,7 +251,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderColor: '#FFF',
+    borderColor: '#000',
     opacity: 0.4,
     width: 280,
     height: 280,
@@ -263,7 +261,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   circle: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     opacity: 0.5,
     borderRadius: 120,
     width: 240,
@@ -273,7 +271,7 @@ const styles = StyleSheet.create({
   },
   circleText: {
     fontSize: 30,
-    color: '#FFF',
+    color: '#000',
     textAlign: 'center',
     position: 'absolute',
     paddingTop: 155,

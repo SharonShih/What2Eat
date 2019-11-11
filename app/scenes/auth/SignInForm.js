@@ -61,7 +61,7 @@ export default class SignInForm extends Component<Props> {
           <TextInput
             style={styles.textInput}
             placeholder = "Email"
-            placeholderTextColor="white"
+            placeholderTextColor="gray"
             keyboardType = "email-address"
             autoCapitalize = "none"
             autoCorrect = { false }
@@ -72,7 +72,7 @@ export default class SignInForm extends Component<Props> {
           <TextInput
             style={styles.textInput}
             placeholder = "Password"
-            placeholderTextColor="white"
+            placeholderTextColor="gray"
             secureTextEntry
             autoCapitalize = "none"
             autoCorrect = { false }
@@ -87,14 +87,14 @@ export default class SignInForm extends Component<Props> {
 
             <Button
               title="Sign In"
-              color="#5A6978"
+              color="#FFF"
               onPress={() => this.onPressSignIn()} />
 
           </TouchableHighlight>
           <View style = {styles.forgetText}>
             <Button
               title="Forget Password?"
-              color ='#FFF'
+              color ='#010EFB'
               onPress= {() => this.props.navigation.navigate('ForgetPassForm')} />
           </View>
 
@@ -105,7 +105,7 @@ export default class SignInForm extends Component<Props> {
 
             <Button
               title="Sign Up"
-              color="#5A6978"
+              color="#FFF"
               onPress={() => this.props.navigation.navigate('RegForm')} />
 
           </TouchableHighlight>
@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   header: {
-    color: "white",
+    color: "black",
     textAlign: 'center',
     fontSize: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingTop: 5,
 
   },
@@ -143,11 +143,11 @@ const styles = StyleSheet.create({
 
     alignSelf: 'stretch',
     fontSize: 20,
-    color: "#FFF",
+    color: "#000",
     marginBottom: 25,
     marginTop: 10,
     height: 40,
-    borderBottomColor: "#FFF",
+    borderBottomColor: "#000",
     borderBottomWidth: 0.5,
     marginHorizontal: 20,
 
@@ -160,8 +160,6 @@ const styles = StyleSheet.create({
     //fontWeight: "900",
     //textAlign: 'center',
 
-    width: 150,
-    height: 150,
 
     //borderStyle: "solid",
     //borderColor: '#FFFFFF',
@@ -170,8 +168,12 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 30,
 
-    marginRight:90,
-    marginLeft:100,
+    alignSelf: "center",
+
+    marginTop: 40,
+
+    // marginRight:90,
+    // marginLeft:100,
   },
 
   Background: {
@@ -181,22 +183,22 @@ const styles = StyleSheet.create({
 
 
   signinButton2:{
-    height: 45,
+    height: 55,
     width: 280,
-    borderRadius: 10,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     marginLeft: 20,
     marginBottom: 10,
-    marginTop: 5,
+    paddingTop: 10,
   },
   forgetText:{
     fontSize: 20,
-    color: "#FFF",
+    color: "#000",
     textAlign: 'center',
     opacity: 0.7,
   },
   text2:{
-    color: '#FFF',
+    color: '#000',
     textAlign: 'center',
     fontSize: 20,
     marginBottom: 10,

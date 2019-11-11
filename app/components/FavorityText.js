@@ -18,7 +18,7 @@ const FavorText =(props)=>{
 const styles = StyleSheet.create({
     text:{
         flexDirection: 'row',
-        color:'white',
+        color:'black',
 
         fontSize:28,
         paddingTop: 40,

@@ -155,7 +155,7 @@ export default class YelpSearchRequest extends Component<Props> {
               style={styles.goButton}>
               <Button
                 title="Let's Go!"
-                color="#000099"
+                color="#FFF"
                 onPress={() => this.goPlace(apple)}/>
             </TouchableHighlight>
 
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   Text: {
     fontSize: 30,
     fontFamily: 'Georgia',
-    color: '#FFF',
+    color: '#000',
     textAlign: 'center',
     position: 'absolute',
     paddingTop: 50,
@@ -219,11 +219,12 @@ const styles = StyleSheet.create({
   goButton: {
     height: 45,
     width: 180,
-    borderRadius: 20,
-    backgroundColor: "white",
+    borderRadius: 30,
+    backgroundColor: "black",
     marginLeft: 40,
     marginBottom: 10,
     marginTop: 40,
+    paddingTop: 5,
   },
   nextButton: {
     height: 45,
