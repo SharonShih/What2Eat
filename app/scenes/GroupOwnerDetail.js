@@ -118,6 +118,14 @@ export default class GroupOwnerDetail extends Component<Props> {
               {length}
             </Text>
           </View>
+            <View>
+                <Text style={styles.titleText} >
+                     Group id:
+                </Text>
+                <Text style={styles.totalNumberText} >
+                    {this.state.groupId}
+                </Text>
+            </View>
           <View style={styles.Button2}>
             <ModalSelector
               data={data}
@@ -160,7 +168,7 @@ export default class GroupOwnerDetail extends Component<Props> {
 
 const styles = StyleSheet.create({
   titleText: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#000',
     marginTop: 20,
     marginBottom: 20,
@@ -168,9 +176,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   totalNumberText: {
-    fontSize: 40,
+    fontSize: 30,
     color: '#000',
-    marginBottom: 20,
+    marginBottom: 10,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
@@ -255,7 +263,7 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     width: 280,
     height: 280,
-    marginTop: 60,
+    marginTop: 30,
     //marginBottom: 20,
     alignSelf: 'center',
     justifyContent: 'center',
@@ -274,7 +282,7 @@ const styles = StyleSheet.create({
     color: '#000',
     textAlign: 'center',
     position: 'absolute',
-    paddingTop: 155,
+    paddingTop: 125,
     paddingLeft: 120,
 
   },

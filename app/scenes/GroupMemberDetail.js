@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Firebase from '../../services/Firebase';
 import {Header, Icon, Left} from "native-base";
+import {Image} from "./Profile";
 
 //TODO: add leave group
 export default class GroupMemberDetail extends Component<Props> {
@@ -64,26 +65,29 @@ export default class GroupMemberDetail extends Component<Props> {
       <ImageBackground
         source={require('../components/Stellar.png')}
         style={styles.Background}>
-        <Header style={{backgroundColor: "#7174BF"}}>
+        <Header style={{backgroundColor: "#s7174BF"}}>
           <Left>
-            <Icon name={'menu'} style={{color: "white"}} onPress={() => this.props.navigation.openDrawer() } />
+            <Icon name={'menu'} style={{color: "black"}} onPress={() => this.props.navigation.openDrawer() } />
           </Left>
           <Text style={styles.headerTitle}>Group</Text>
         </Header>
 
         <ScrollView>
           <View>
+
             <Text style={styles.titleText} >
-              Total group mebers:
+              Total Party of:
             </Text>
             <Text style={styles.totalNumberText} >
-              {length}
+              4 {/*{length}*/}
             </Text>
 
             <Text style={styles.statusText} >
               Waiting for group owner to genergate result...
             </Text>
-
+             <Text style={styles.titleText} >
+                  HANG IN THERE!
+              </Text>
           </View>
         </ScrollView>
       </ImageBackground>
@@ -99,7 +103,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   text:{
-    color:'#FFF',
+    color:'#000',
     fontSize: 30,
     paddingHorizontal: 60,
     paddingBottom: 20,
@@ -110,28 +114,28 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 30,
-    color: '#FFF',
-    marginTop: 20,
+    color: '#000',
+    marginTop: 70,
     marginBottom: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
   totalNumberText: {
     fontSize: 40,
-    color: '#FFF',
+    color: '#000',
     marginBottom: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
   statusText: {
     fontSize: 15,
-    color: '#FFF',
+    color: '#000',
     marginTop: 50,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
   headerTitle: {
-    color: 'white',
+    color: '#000',
     fontSize: 15,
     justifyContent: 'center',
     paddingTop: 20,
@@ -139,4 +143,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
   },
+    logo: {
+
+        paddingTop: 50,
+        paddingBottom: 50,
+
+        marginTop: 20,
+        marginRight:90,
+        marginLeft:70,
+    },
 });
