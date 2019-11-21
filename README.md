@@ -1,5 +1,12 @@
 # What2Eat
 CMPE 195A & B Project
+
+What2Eat is a Restaurant Recommender Mobile Application
+
+The Frontend is developed in React Native and Javascript
+
+
+
 ### Prerequisite 
 - Can only run on MacOS
 - Xcode is up to date
@@ -28,3 +35,8 @@ Or
 react-native run-ios
 ```
 
+Offical Website: https://sites.google.com/sjsu.edu/what2eat/home
+
+iOS Beta App on TestFlight: https://sites.google.com/sjsu.edu/what2eat/home
+
+Let us know what you think! Email us at `what2eat.app.123@gmail.com`
