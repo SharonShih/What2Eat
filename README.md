@@ -3,7 +3,8 @@ CMPE 195A & B Project
 
 What2Eat is a Restaurant Recommender Mobile Application
 
-The Frontend is developed in React Native and Javascript
+The Frontend is developed in React Native, along with Firebase as our Database. 
+Firebase cloud function as our serverless backend server.
 
 
 
